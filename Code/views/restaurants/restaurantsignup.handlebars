@@ -1,0 +1,44 @@
+<main>
+    <div class="container">
+        <h1>Add a Restaurant</h1>
+        <form id="restaurant-signup-form" class="center padding" action="/post" method="POST">
+            <div class="form-group">
+                <label for="name">Restaurant Name:</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Enter Restaurant Name">
+            </div>
+            {{!-- <div class="form-group">
+                <label for="website">Website:</label>
+                <input type="text" class="form-control" id="website" name="website" placeholder="Enter your Website">
+                <small class="form-text text-muted">Enter the website in format start: http://www and end with
+                    .com</small>
+            </div> --}}
+            {{!-- <div class="form-group">
+                <label for="service">Services:</label>
+                <input type="text" class="form-control" id="service" name="service" placeholder="Service">
+            </div> --}}
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <input type="text" class="form-control" id="address" name="address"
+                    placeholder="Enter Address of restaurant">
+            </div>
+            <div class="form-group">
+                <label for="zip">Zip:</label>
+                <input type="text" class="form-control" id="zip" name="zip" placeholder="Enter Zip code">
+            </div>
+            <div class="form-group">
+                <label for="foodmwnu">Menu:</label>
+                <input type="text" class="form-control" id="foodmenu" name="foodmenu" placeholder="Enter restaurant menu">
+            </div>
+            <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
+            <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
+        </form>
+
+        {{#if errorcode}}
+
+        <p class="error">{{message}}</p>
+        {{/if}}
+
+
+    </div>
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</main>

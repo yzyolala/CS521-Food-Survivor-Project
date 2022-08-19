@@ -1,0 +1,13 @@
+<main>
+    <div class="card container" id="cont">
+        <h1>Successfully deleted</h1>
+        <h3>Restaurant will be deleted on Restaurant List page</h3>
+        <div>
+            <p>{{message}}</p>
+        </div>
+        {{#if message}}
+        <a class="logoutShiftLine" href="/restaurants">Go to the restaurants</a>
+        {{/if}}
+    </div>
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</main>

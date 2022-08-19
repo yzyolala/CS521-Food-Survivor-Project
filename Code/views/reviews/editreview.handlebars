@@ -1,0 +1,17 @@
+<main>
+    <div class="card-full container">
+        <p><a href="/restaurants/{{this._id}}">Go back to the Restaurant page!</a></p>
+        <h3>Edit Review</h3>
+        <form method="POST" action="/reviews/reviews/updatereview/{{this.id}}">
+            <h4>Review Text</h4>
+            <p>Please note: You can only edit the review</p>
+            <label for="reviewText">
+
+                <input id="reviewText" name="reviewText" value="{{testreview}}">
+            </label>
+            <button type="submit" id="btn-id">Edit Review</button>
+            <p>{{message}}</p>
+        </form>
+        <a class="btn btn-primary" href="/logout">Logout</a>
+        </>
+</main>

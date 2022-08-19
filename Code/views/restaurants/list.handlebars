@@ -1,0 +1,22 @@
+<main>
+    {{#each restaurantsList}}
+    <div class="card-deck">
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                    <h5 class="card-title"><a href="/restaurants/{{this._id}}">{{this.name}}</a></h5>
+                    <p class="card-text">{{this.address}}</p>
+                    <p class="card-text">Menu: {{this.foodmenu}}</p>
+                    <p class="card-text">Rating: {{this.rating}}</p>
+                </div>
+            </div>
+        </div>
+        <script src="../../public/javascript/filter.js"></script>
+    </div>
+    {{/each}}
+    <br>
+    <br>
+    <br>
+    <br>
+
+</main>

@@ -1,0 +1,114 @@
+<main>
+
+  <div class="container-private">
+    <div class="card card-private" style="width: 18rem;">
+      <h3>Your Current User Details</h3>
+      <img src="/profilepic/{{id}}" onerror="this.src='/public/image/default-user.png'" class="card-img-top profilePic"
+        alt="Profile Picture">
+      <div class="card-body">
+        <h5 class="card-title">{{firstname}} {{lastname}}</h5>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">Email:{{email}}</li>
+        <li class="list-group-item">Username:{{username}}</li>
+        <li class="list-group-item">Age:{{age}}</li>
+      </ul>
+      <div>
+        <a href="/delete" class="btn-private btn btn-primary">Delete Account</a>
+      </div>
+    </div>
+
+    <div id="card-private" class="card" style="width: 24rem;">
+
+      <h3>Change Your Details</h3>
+      <form action="/upload/profilepic" enctype="multipart/form-data" method="POST">
+        <input type="file" name="picture" accept="image/*" class="btn-private btn btn-primary" required />
+        <input type="submit" class="btn-private btn btn-primary" value="Upload Photo" />
+      </form>
+      {{!-- <img src="../../public/img/default-user.png" class="card-img-top" alt="..."> --}}
+      <div class="card-body">
+        <h5 class="card-title">{{firstname}} {{lastname}}</h5>
+      </div>
+
+      <form id="signup-form" class="center padding" action="/update" method="POST">
+        {{!-- First Name --}}
+        <div class="form-group">
+          <label for="firstname">Firstname:</label>
+          <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your First Name"
+            value="{{firstname}}">
+        </div>
+        {{!-- LastName --}}
+        <div class="form-group">
+          <label for="lastname">Lastname:</label>
+          <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your Last Name"
+            value="{{lastname}}">
+        </div>
+        {{!-- Email --}}
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" class="form-control" id="email" name="email" aria-describedby="email"
+            placeholder="Enter your Email" value="{{email}}">
+
+        </div>
+        {{!-- Username --}}
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input type="text" class="form-control" id="username" name="username" aria-describedby="username"
+            placeholder="Enter your Username" value="{{username}}">
+          <small class="form-text text-muted">We'll never share your details with anyone else.</small>
+        </div>
+        {{!-- Password --}}
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+          <small class="form-text text-muted">Write your original password or new password to
+            change.</small>
+        </div>
+
+        {{!-- Profile Picture --}}
+        {{!-- <div class="form-group">
+          <label for="profilePicture">Profile Picture:</label>
+          <input type="text" class="form-control" id="profilePicture" name="profilePicture"
+            placeholder="Enter your Profile Picture">
+        </div> --}}
+
+
+        {{!-- Age --}}
+        <div class="form-group">
+          <label for="age">Age:</label>
+          <input type="number" class="form-control" id="age" name="age" placeholder="Enter your Age" value="{{age}}">
+        </div>
+
+
+
+        <button type="submit" id="btn-id-private" class="btn-private btn btn-primary">Change Details</button>
+      </form>
+      <a class="btn btn-primary" href="/logout">Logout</a>
+    </div>
+
+
+
+
+  </div>
+
+  {{#if errorcode}}
+
+  <p class="error">{{message}}</p>
+  {{/if}}
+
+  <div class="container-review">
+    <h3>Reviews by You:</h3>
+    {{#each this.getReviews}}
+    <div class=" card card-getreviews" style="width: 18rem;">
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{this.reviewText}}</li>
+        <li class="list-group-item">{{this.rating}}</li>
+      </ul>
+    </div>
+    {{/each}}
+
+    <a class="btn btn-primary" href="/logout">Logout</a>
+  </div>
+
+
+</main>

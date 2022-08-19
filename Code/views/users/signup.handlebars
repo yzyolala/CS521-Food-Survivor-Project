@@ -1,0 +1,66 @@
+<main>
+  <div class="container">
+    <h1>SignUp</h1>
+    <form id="signup-form" class="center padding" action="/signup" method="POST">
+      {{!-- First Name --}}
+      <div class="form-group">
+        <label for="firstname">Firstname:</label>
+        <input type="text" class="form-control" id="firstname" name="firstname" placeholder="Enter your First Name">
+      </div>
+      {{!-- LastName --}}
+      <div class="form-group">
+        <label for="lastname">Lastname:</label>
+        <input type="text" class="form-control" id="lastname" name="lastname" placeholder="Enter your Last Name">
+      </div>
+      {{!-- Email --}}
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" class="form-control" id="email" name="email" aria-describedby="email"
+          placeholder="Enter your Email">
+
+      </div>
+      {{!-- Username --}}
+      <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" id="username" name="username" aria-describedby="username"
+          placeholder="Enter your Username">
+        <small class="form-text text-muted">We'll never share your details with anyone else.</small>
+      </div>
+      {{!-- Password --}}
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" id="password" name="password" placeholder="Enter your Password">
+      </div>
+
+      {{!-- Profile Picture --}}
+      {{!-- <div class="form-group">
+        <label for="profilePicture">Profile Picture:</label>
+        <input type="text" class="form-control" id="profilePicture" name="profilePicture"
+          placeholder="Enter your Profile Picture">
+      </div> --}}
+
+      {{!-- Age --}}
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" class="form-control" id="age" name="age" placeholder="Enter your Age">
+      </div>
+
+
+
+      <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
+    </form>
+
+    {{#if errorcode}}
+
+    <p class="error">{{message}}</p>
+    {{/if}}
+
+
+    <div>
+      <a href="/">Already have an account? Click here to log-in</a>
+
+    </div>
+
+  </div>
+
+</main>

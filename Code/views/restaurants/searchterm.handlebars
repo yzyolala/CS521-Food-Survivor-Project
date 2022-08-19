@@ -1,0 +1,26 @@
+<main>
+
+    {{#each data}}
+    <div class="card-deck">
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top">
+                <div class="card-body">
+                    <h1>List restaurants</h1>
+                    <h5 class="card-title"><a href="/restaurants/{{this._id}}">{{this.name}}</a></h5>
+                    <p class="card-text">{{this.address}}</p>
+                    {{!-- <p class="card-text">Menu: {{this.menu}}</p> --}}
+                    <p class="card-text">Rating: {{this.rating}}</p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+    {{#if data}}
+    {{else}}
+    <h1 class="not-found">We're sorry, but no results were found {{this.name}}.Please search again</h1>
+    {{/if}}
+
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</main>

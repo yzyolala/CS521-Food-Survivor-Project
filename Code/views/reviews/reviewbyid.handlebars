@@ -1,0 +1,15 @@
+<main>
+    <p><a href="/restaurants">Go back to Restaurant list page</a></p>
+    <div class="card-full">
+        <h1><a href="../reviews/{{reviewList._id}}">{{this}}</a></h1>
+        <p>Restaurant Name:</p>
+        <p>{{this.name}}</p><br>
+        <p>Customer username is:</p>
+        <p>{{this.username}}</p>
+        <p>Review Text is:</p>
+        <p>{{this.reviewText}}</p><br>
+        <p>Rating is:</p>
+        <p>{{this.rating}}</p>
+    </div>
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</main>

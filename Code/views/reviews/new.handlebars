@@ -1,0 +1,15 @@
+<div class="center">
+    <p><a href="/restaurants">Go back to Restaurant list page</a></p>
+    <h1>Review of One Restaurant</h1>
+    <main>
+        <form action="/reviews/{{restaurantId._id}}" method="POST" class="new-post-form">
+            <label>
+                {{ this.restaurantId }}
+                <input type="text" reviewText="Text" placeholder="Enter Review" value="{{this.reviewText}}"
+                    class="full-width-input" />
+            </label>
+            <button type="submit">Submit</button>
+        </form>
+    </main>
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</div>

@@ -1,0 +1,147 @@
+<main>
+
+    <div class="card-deck">
+        <div class="col-sm-6">
+            <div class="card" style="width: 18rem;">
+                <div class="card-body" id="redbox">
+                    <form id="login" action="/restaurants/{{this.restaurantId}}/delete" method="POST">
+                        <div class="dropdown">
+                            <button class="dropbtn">Options</button>
+                            <div class="dropdown-content">
+
+                                <p><a href="/restaurants/{{this.restaurantId}}/delete">Delete Restaurant</a></p>
+                                <p><a href="/restaurants/{{this.restaurantId}}/edit">Edit Restaurant</a></p>
+                            </div>
+                        </div>
+                    </form>
+                    <h1>Restaurant Details</h1>
+
+                    <p class="card-text bold-id">Name: {{this.name}}</p>
+                    <p class="card-text bold-id">Address: {{this.address}}</p>
+                    <p class="card-text bold-id">Zip: {{this.zip}}</p>
+                    <p class="card-text bold-id">Menu: {{this.foodmenu}}</p>
+                    <p class="card-text bold-id">Rating: {{this.rating}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-deck">
+        <div class="col-sm-6">
+            <div class="card" style="width: 25rem;">
+                <div class="card-body">
+                    <h1>Given Reviews</h1>
+                    {{#each this.getReviews}}
+                    <div class="card car">
+
+                        <div class="never">
+                            <p class="card-text">reviewText: {{this.reviewText}}</p>
+                            <p class="card-text">rating: {{this.rating}}</p>
+                            <div class="likea">
+                                <p><a class="btn btn-primary update"
+                                        href="/reviews/reviews/updatereview/{{this._id}}">Edit</a></p>
+                                <p><a class="btn btn-danger update"
+                                        href="/reviews/reviews/deletereview/{{this._id}}">Delete</a></p>
+                            </div>
+                        </div>
+                        <script src="https://use.fontawesome.com/fe459689b4.js"></script>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                        <div class="likea">
+                            <a class="like"><i class="fa fa-thumbs-o-up"></i>
+                                <label for="like"></label>
+                                Like <input id="like" class="qty1" name="qty1" readonly="readonly" type="text"
+                                    value="0" />
+                            </a>
+                            <a class="dislike"><i class="fa fa-thumbs-o-down"></i>
+                                <label for="dislike"></label>
+                                Dislike <input id="dislike" class="qty2" name="qty2" readonly="readonly" type="text"
+                                    value="0" />
+                            </a>
+                        </div>
+
+                        <script src="/public/javascript/like.js"></script>
+
+                        <div class="card-text">
+                            <h1 class="card-text">Comments</h1>
+                            {{#each this.commentTexts}}
+                            <ul>
+                                <li>
+                                    <p>{{this}}</p>
+                                </li>
+
+                            </ul>
+                            {{/each}}
+
+                            <div class="center">
+                                <h2>Post a comment</h2>
+                                <form action="/comments/add/{{this._id}}" method="POST" class="new-comment-form">
+                                    <div class="form-group">
+                                        <label for="comment">Comment:</label>
+                                        <input id="comment" type="text" class="form-control" name="commentText"
+                                            placeholder="Enter a comment....">
+
+                                    </div>
+                                    <label for="submit">Submit</label>
+                                    <button id="submit" class="btn btn-primary" type="submit">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="review-pan">
+        <h1>Review </h1>
+        <form class="center padding" action="/reviews/reviews/{{this.restaurantId}}" method="POST">
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <input type="text" class="form-control" id="rating" name="rating" aria-describedby="rating"
+                    placeholder="Rating">
+            </div>
+            <div class="form-group">
+                <label for="reviewText">ReviewText:</label>
+                <input type="text" class="form-control" id="reviewText" name="reviewText" aria-describedby="reviewText"
+                    placeholder="reviewText">
+            </div>
+            <label for="btn-id"></label>
+            <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
+        </form>
+        {{#if errorcode}}
+
+        <p class="error">{{message}}</p>
+        {{/if}}
+
+    </div>
+
+
+
+    {{!--
+    {{#if data}}
+    <ul>
+        {{#each data}}
+        <li>
+            <a style="color: white;" href="/restaurants/">******{{this.restaurantId}}</a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p class="not-found">We're sorry, but no results were found for {{this.data.name}}.</p>
+    {{/if}}
+    {{#if hasErrors}}
+    {{#each errors}}
+    <li>
+        {{this}}
+    </li>
+    <div class="another">
+        <a href="/">Make another search</a>
+    </div>
+    {{/each}}
+    {{/if}}
+    <div class="another">
+        <a href="/">Make another search</a>
+    </div> --}}
+
+</main>
