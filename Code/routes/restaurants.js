@@ -123,8 +123,8 @@ router.post('/post', async (req, res) => {
         const newRestaurant = await restaurantsData.create(
             restaurantInfo.name,
             restaurantInfo.address,
-            restaurantInfo.foodmenu,
             restaurantInfo.zip,
+            restaurantInfo.foodmenu,
         );
         console.log("newRestaurant", newRestaurant)
         res.status(200).render("restaurants/message", { message: "Restaurant created successfully" });
