@@ -1,13 +1,14 @@
-const dbConnection = require("../config/mongoConnection");
+const connection = require('../config/mongoConnection');
 const data = require("../data/");
 const commentsData = data.comments;
 const customersData = data.customers;
 const reviewsData = data.reviews;
 const restaurantsData = data.restaurants;
-const testData = data.test;
+// const testData = data.test;
 
-const main = async () => {
-    const db = await dbConnection();
+async function main() {
+
+    const db = await connection.dbConnection();
     await db.dropDatabase();
     //   Creating Restaurant Profile
     const DreamZ = await restaurantsData.create("DreamZ Beauty Restaurant", "Washington Street Hoboken", "07030", "Idli Sambar, Dosa")
@@ -47,7 +48,7 @@ const main = async () => {
     console.log(Sorella, "Sorella has been added successfully")
 
     //   Creating Customers Profile
-    const user1 = await customersData.createUser("John", "Kolh", "john@gmail.com", "johnk", "johnkolh", "","24");
+    const user1 = await customersData.createUser("John", "Kolh", "john@gmail.com", "johnk", "johnkolh", "", "24");
     console.log(user1, "User 1 created successfully");
 
     const user2 = await customersData.createUser("Kate", "Ken", "kate@gmail.com", "katekk", " katekk123", "", "21");
@@ -100,9 +101,9 @@ const main = async () => {
     console.log(comment2)
     console.log("Comment2 added successfully");
     console.log("Comment22 added successfully");
-    console.log("Done seeding database");
 
-    await db.serverConfig.close();
+    console.log('Finished seeding database');
+    await connection.closeConnection();
 };
 
 main().catch((error) => {
