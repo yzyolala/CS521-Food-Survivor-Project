@@ -1,24 +1,13 @@
 const mongoCollections = require('../config/mongoCollections');
 var mongo = require('mongodb');
 const customers = mongoCollections.customers;
-ObjectId = require('mongodb').ObjectID;
+ObjectId = require('mongodb');
 const bcrypt = require('bcrypt');
 const saltRounds = 16;
 
 
 module.exports = {
-    async checkDuplicate(un) {
-        const userCollection = await customers();
-        const user1 = await userCollection.find({}).toArray();
-        for (let i = 0; i < user1.length; i++) {
-            let str = user1[i].username.toString();
-            if (user1[i].username == un) {
-                console.log('************* Check duplicate username**********************');
-                return 0
-            }
-        }
-        return 1;
-    },
+
     async addUserProfilePicture(id, profilePicture) {
         if (!id) throw "User id is missing";
         var objRevId = ""
@@ -115,11 +104,7 @@ module.exports = {
     },
 
 
-
-
-
     async deleteCustomerbyId(id) {
-
         if (!id) throw 'No id entered';
         if (typeof id === 'string' && id.length == 0) {
             throw 'Invalid id';
@@ -134,205 +119,151 @@ module.exports = {
         const reviewCollection = await customers();
         const customerCollection = await customers();
         const customerinfo = await customerCollection.deleteOne({ _id: ObjectId(id) });
-        // const deletionInfo = await reviewCollection.deleteOne({ _id: ObjectId(reviewId) });
         if (customerinfo.deletedCount === 0) throw `Could not delete user of ${id}.`;
-
         return { userdeleted: true };
     },
 
     async createUser(firstname, lastname, email, username, password, profilePicture, age) {
-
-        if (firstname == undefined) {
-            throw 'Parameter not provided'
-        }
-        if (typeof firstname != "string") {
-
-            throw 'Firstname not of type string'
-        }
-        firstname = firstname.toUpperCase();
-        firstname = firstname.trim()
-
-        if (!firstname) throw 'Firstname not provided or only empty spaces provided';
-
-        function isCharacterALetter(char) {
-            char = firstname
-            var value = /^[a-zA-Z]+$/.test(char);
-            return value
-        }
-
-        let test = isCharacterALetter(firstname)
-        if (test) {
-        } else {
-            throw 'Firstname should only be characters'
-        }
-        if (typeof lastname != "string") {
-
-            throw 'Lastname not of type string'
-        }
-
-        lastname = lastname.toUpperCase();
-        lastname = lastname.trim()
-
-        if (!lastname) throw 'Lastname not provided or only empty spaces provided';
-
-        function isCharacterALetter(char) {
-            char = lastname
-            value = /^[a-zA-Z]+$/.test(char);
-            // console.log(value);  
-            return value
-        }
-
-        let test2 = isCharacterALetter(lastname)
-        if (test2) {
-
-        } else {
-            throw 'Lastname should only be characters'
-        }
-
-
-
-        /*
-         ************* Username validation **********************
-         */
-
-        username = username.toLowerCase();
-        if (username.length < 3) {
-            throw 'Username should contain more than two characters '
-        }
-
-        for (let i = 0; i < username.length; i++) {
-            if (username.charCodeAt(i) >= 48 && username.charCodeAt(i) <= 57 || username.charCodeAt(i) >= 65 && username.charCodeAt(i) <= 90 || username.charCodeAt(i) >= 97 && username.charCodeAt(i) <= 122) {
-
-            } else {
-                throw 'User name contains non alphanumeric characters'
+        try {
+            if (firstname == undefined) {
+                throw 'Parameter not provided'
             }
+            if (typeof firstname != "string") {
+                throw 'Firstname not of type string'
+            }
+            firstname = firstname.toUpperCase();
+            firstname = firstname.trim()
+            if (!firstname) throw 'Firstname not provided or only empty spaces provided';
+
+            function isCharacterALetter(char) {
+                char = firstname
+                var value = /^[a-zA-Z]+$/.test(char);
+                return value
+            }
+            let test = isCharacterALetter(firstname)
+            if (test) {
+            } else {
+                throw 'Firstname should only be characters'
+            }
+            if (typeof lastname != "string") {
+                throw 'Lastname not of type string'
+            }
+            lastname = lastname.toUpperCase();
+            lastname = lastname.trim()
+            if (!lastname) throw 'Lastname not provided or only empty spaces provided';
+
+            function isCharacterALetter(char) {
+                char = lastname
+                value = /^[a-zA-Z]+$/.test(char);
+                return value
+            }
+            let test2 = isCharacterALetter(lastname)
+            if (test2) {
+            } else {
+                throw 'Lastname should only be characters'
+            }
+
+            if (username === null || username.length == 0) throw 'You cannot enter nothing for username!'
+            if (typeof username != 'string') throw 'The type of username must be string'
+            if (username.length < 4) throw 'The username should have at least 4 characters'
+            var regex = /^[A-Za-z0-9]+$/;
+            if (!username.match(regex)) throw 'Username should be alphanumeric without any spaces or blanks.'
+
+            const usersCollection = await customers();
+            var nameLowerCase = username.toLowerCase();
+            const userExists = await usersCollection.findOne({ username: nameLowerCase });
+            if (userExists) throw "There is already a user with that username";
+
+            email = email.toLowerCase()
+            if (!email) {
+                throw 'Email not provided'
+            }
+            if (email.trim().length == 0) {
+
+                throw 'Email cannot be empty spaces'
+            }
+
+            function validateEmail(email) {
+                var re = /\S+@\S+\.\S+/;
+                return re.test(email);
+            }
+            console.log(validateEmail(email));
+            let email_result = validateEmail(email)
+
+            if (email_result) {
+            } else {
+                throw 'Email is not valid'
+            }
+            if (!password) throw 'Password not provided';
+            if (typeof username != "string" || typeof password != "string") {
+                throw 'Password/Username not of type string'
+            }
+
+            if (password.trim().length == 0) {
+                throw 'Password cannot be empty spaces'
+            }
+
+            const plainTextPassword = password;
+            const hash = await bcrypt.hash(plainTextPassword, saltRounds);
+            password = hash;
+
+            let newUser = {
+                username: username,
+                password: password,
+                firstname: firstname,
+                lastname: lastname,
+                email: email,
+                profilePicture: profilePicture,
+                age: age,
+                reviewId: [],
+                commentIds: []
+
+            };
+
+            const insertInfo = await usersCollection.insertOne(newUser);
+            if (insertInfo.insertedCount === 0) throw 'We cannot add a new user.';
+            console.log("{ userInserted: true }");
+            return { userInserted: true };
+        } catch (error) {
+            console.log(error)
         }
-
-        if (!username) throw 'User name not provided';
-
-        if (username.trim().length == 0) {
-
-            throw 'Username cannot be empty spaces'
-        }
-
-        email = email.toLowerCase()
-
-        if (!email) {
-            throw 'Email not provided'
-        }
-        if (email.trim().length == 0) {
-
-            throw 'Email cannot be empty spaces'
-        }
-
-        function validateEmail(email) {
-
-            var re = /\S+@\S+\.\S+/;
-            return re.test(email);
-        }
-        console.log(validateEmail(email));
-        let email_result = validateEmail(email)
-
-        if (email_result) {
-
-        } else {
-            throw 'Email is not valid'
-        }
-
-        if (!password) throw 'Password not provided';
-
-        if (typeof username != "string" || typeof password != "string") {
-
-            throw 'Password/Username not of type string'
-        }
-
-
-
-        if (password.trim().length == 0) {
-
-            throw 'Password cannot be empty spaces'
-        }
-
-        const plainTextPassword = password;
-        const hash = await bcrypt.hash(plainTextPassword, saltRounds);
-        password = hash;
-
-        const userCollection = await customers();
-
-        let newUser = {
-            username: username,
-            password: password,
-            firstname: firstname,
-            lastname: lastname,
-            email: email,
-            profilePicture: profilePicture,
-            age: age,
-            reviewId: [],
-            commentIds: []
-
-        };
-
-
-        let temp = await this.checkDuplicate(username)
-        if (!temp) {
-            console.log('Check duplicate function ends')
-            throw 'User name already exists'
-            console.log("-----------------------------")
-        }
-
-        const insertInfo = await userCollection.insertOne(newUser);
-        if (insertInfo.insertedCount === 0) throw 'Could not add new User';
-        const newId = insertInfo.insertedId;
-        const customer = await this.getCustomerById(newId.toString());
-        return JSON.parse(JSON.stringify(customer));
     },
 
     async checkUser(username, password) {
-        username = username.toLowerCase();
-        if (username.length < 4) {
-            throw 'Username should contain more than three characters '
-        }
-        if (password.length < 6) {
-            throw 'Password should contain more than five characters '
-        }
-        for (let i = 0; i < username.length; i++) {
-            if (username.charCodeAt(i) >= 48 && username.charCodeAt(i) <= 57 || username.charCodeAt(i) >= 65 && username.charCodeAt(i) <= 90 || username.charCodeAt(i) >= 97 && username.charCodeAt(i) <= 122) {
+        try {
+            if (username === null || username.length == 0) throw 'You cannot enter nothing for username!'
+            if (typeof username != 'string') throw 'The type of username must be string'
+            if (username.length < 4) throw 'Username should have at least 4 characters'
+            var regex = /^[A-Za-z0-9]+$/;
+            if (!username.match(regex)) throw 'Username should be alphanumeric without any spaces or blanks.'
 
-            } else {
-                throw 'User name contains non alphanumeric characters'
-            }
-        }
+            if (password === null || password.length == 0) throw 'You cannot enter nothing for password!'
+            if (typeof password != 'string') throw 'The type of password must be string'
+            var regex2 = /^[\u4e00-\u9fa5_a-zA-Z0-9]+$/
+            if (!password.match(regex2)) throw 'Password cannot include any spaces or blanks.'
+            if (password.length < 6) throw 'Password should be at least 6 characters.'
 
-        if (!username) throw 'User name not provided';
-        if (!password) throw 'Password not provided';
-        if (typeof username != "string" || typeof password != "string") {
-            throw 'Parameter not of type string'
-        }
-        if (username.trim().length == 0) {
-
-            throw 'Username cannot be empty spaces'
-        }
-        if (password.trim().length == 0) {
-
-            throw 'Password cannot be empty spaces'
+        } catch (error) {
+            console.log(error)
         }
 
-        const userCollection = await customers();
-        const user1 = await userCollection.find({}).toArray();
+        const usersCollection = await customers();
+        var nameLowerCase = username.toLowerCase();
+        const userData = await usersCollection.findOne({ username: nameLowerCase });
 
-        flag = 0;
-        for (let i = 0; i < user1.length; i++) {
-            let str = user1[i].username.toString();
-            if (str == username) {
-                if (bcrypt.compareSync(password, user1[i].password)) {
-                    flag = 1;
-                    console.log("Credentials match")
-                    return { authenticated: true };
-                }
-            }
+        try {
+            if (!userData) throw "Either the username or password is invalid";
+        } catch (error) {
+            console.log(error)
         }
-        if (flag == 0) {
+
+        let compareToMatch = await bcrypt.compare(password, userData.password);
+        if (compareToMatch) {
+            console.log("{ authenticated: true }");
+            return { authenticated: true }
+        }
+        else {
             throw "Either the username or password is invalid"
         }
-    },
-};
+    }
+}
