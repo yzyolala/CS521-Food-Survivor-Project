@@ -19,9 +19,14 @@
         name="name" value="{{data.name}}" id="search">
       <button class="btn btn-outline-success btn-round" type="submit" id="navStyle">Search</button>
     </form>
-    <a class="btn-sm-square bg-white rounded-circle ms-3" href="/" data-bs-toggle="tooltip" data-bs-placement="bottom"
-      title="Profile">
-      <small class="fa fa-user text-body"></small>
+    <div class="nav-item">
+      <a href="#" class="nav-link btn-sm-square bg-white rounded-circle ms-3" data-bs-toggle="dropdown"><small
+        class="fa fa-user text-body"></small></a>
+      <div class="dropdown-menu m-0">
+        <a href="/" class="dropdown-item">View Profile</a>
+        <a href="/logout" class="dropdown-item">Sign out</a>
+      </div>
+    </div>
     </a>
     <a class="btn-sm-square bg-white rounded-circle ms-3" href="/manage" data-bs-toggle="tooltip"
       data-bs-placement="bottom" title="Add Restaurant">

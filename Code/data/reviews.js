@@ -6,10 +6,12 @@ const customer = mongoCollections.customers;
 
 
 module.exports = {
-    async create(restaurantId, customersId, reviewText, rating) {
+    async create(restaurantId, customersId, reviewText, rating, profileImage, name) {
         rating = Number(rating)
         restaurantId = restaurantId.toString();
         customersId = customersId.toString();
+        name = name.toString();
+        profileImage = img.toString('base64');
         if (typeof restaurantId != 'string') throw 'No Restaurant with proper type has been provided'
         if (restaurantId == null || restaurantId.length == 0) throw 'No Restaurant has been selected'
         if (restaurantId.trim() == '') throw 'Restaurant Id provided contains only empty spaces'
@@ -50,8 +52,8 @@ module.exports = {
             customersId: customersId,
             reviewText: reviewText,
             rating: rating,
-            upvote: [],
-            downvote: []
+            name: name,
+            profileImage: profileImage,
         }
 
         const insertInfo = await reviewCollection.insertOne(newReview);

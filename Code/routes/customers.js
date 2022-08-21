@@ -28,7 +28,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage })
 
 router.post('/upload/profilepic', upload.single('picture'), async (req, res) => {
-    console.log("Hello from the other sidess ssssssssssss")
     var img = fs.readFileSync(req.file.path);
     var encode_image = img.toString('base64');
     let userId = req.session.user.id;
@@ -44,9 +43,7 @@ router.post('/upload/profilepic', upload.single('picture'), async (req, res) => 
 });
 
 router.get('/profilepic/:id', async (req, res) => {
-    console.log("iiiiiiiiiiiiiiiiiiiiii")
     const getUser = await users.getCustomerById(req.params.id);
-    console.log("iiiiiiiiiiiiiiiiiiiiii")
     console.log(getUser)
     const profilepicData = getUser.profilePicture;
     if (profilepicData == "") {
@@ -94,7 +91,6 @@ router.get('/delete', async (req, res) => {
         res.render("users/signup", { title: "Signup", heading: "Signup" });
     } else {
         let errorcode = false;
-        console.log("helooooooooooooooooooooooooooooooooooooooooooooooo")
         let tempId = req.session.user.id
         tempId = tempId.toString(tempId);
         console.log(tempId, "00000000000000000")

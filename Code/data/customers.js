@@ -1,13 +1,24 @@
 const mongoCollections = require('../config/mongoCollections');
 var mongo = require('mongodb');
 const customers = mongoCollections.customers;
-ObjectId = require('mongodb');
+ObjectId = require('mongodb').ObjectId;
 const bcrypt = require('bcrypt');
 const saltRounds = 16;
 
 
 module.exports = {
-
+    async checkDuplicate(un) {
+        const userCollection = await customers();
+        const user1 = await userCollection.find({}).toArray();
+        for (let i = 0; i < user1.length; i++) {
+            let str = user1[i].username.toString();
+            if (user1[i].username == un) {
+                console.log('************* Check duplicate username**********************');
+                return 0
+            }
+        }
+        return 1;
+    },
     async addUserProfilePicture(id, profilePicture) {
         if (!id) throw "User id is missing";
         var objRevId = ""
@@ -103,8 +114,8 @@ module.exports = {
         return customer;
     },
 
-
     async deleteCustomerbyId(id) {
+
         if (!id) throw 'No id entered';
         if (typeof id === 'string' && id.length == 0) {
             throw 'Invalid id';
@@ -116,10 +127,10 @@ module.exports = {
         }
 
         /* delete review from DB */
-        const reviewCollection = await customers();
         const customerCollection = await customers();
         const customerinfo = await customerCollection.deleteOne({ _id: ObjectId(id) });
         if (customerinfo.deletedCount === 0) throw `Could not delete user of ${id}.`;
+
         return { userdeleted: true };
     },
 
@@ -266,4 +277,4 @@ module.exports = {
             throw "Either the username or password is invalid"
         }
     }
-}
+};

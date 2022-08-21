@@ -41,7 +41,7 @@ router.get('/restaurants/:restaurantId', async (req, res) => {
 
 router.get("/manage", async (req, res) => {
     if (!req.session.AuthCookie) {
-        res.status(400).render("restaurants/error", { message: "Please login to post a restaurant!!" });
+        res.status(400).render("restaurants/error", { message: "Please login to add a new restaurant listing!!" });
     }
     try {
         const restaurantsList = await restaurantsData.getAll();

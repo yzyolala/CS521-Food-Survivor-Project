@@ -8,10 +8,10 @@ const getCollectionFn = (collection) => {
             const db = await dbConnection.dbConnection();
             _col = await db.collection(collection);
         }
-
         return _col;
     };
 };
+
 module.exports = {
     customers: getCollectionFn('customers'),
     restaurants: getCollectionFn('restaurants'),

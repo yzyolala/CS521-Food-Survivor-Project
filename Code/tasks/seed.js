@@ -100,7 +100,6 @@ async function main() {
     );
     console.log(comment2)
     console.log("Comment2 added successfully");
-    console.log("Comment22 added successfully");
 
     console.log('Finished seeding database');
     await connection.closeConnection();
