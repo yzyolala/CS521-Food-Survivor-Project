@@ -18,7 +18,13 @@
             </div>
             <div class="form-group">
                 <label for="foodmwnu">Menu:</label>
-                <input type="text" class="form-control" id="foodmenu" name="foodmenu" placeholder="Enter restaurant menu">
+                <input type="text" class="form-control" id="foodmenu" name="foodmenu"
+                    placeholder="Enter restaurant menu">
+            </div>
+            <div class="form-group">
+                <label for="magicbox">Magicbox:</label>
+                <input type="text" class="form-control" id="magicbox" name="magicbox"
+                    placeholder="Enter magicbox number!">
             </div>
             <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
             <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
@@ -28,8 +34,6 @@
 
         <p class="error">{{message}}</p>
         {{/if}}
-
-
     </div>
     <a class="btn btn-primary" href="/logout">Logout</a>
 </main>
