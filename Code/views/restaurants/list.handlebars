@@ -1,26 +1,3 @@
-{{!-- <main>
-    {{#each restaurantsList}}
-    <div class="card-deck">
-        <div class="col-sm-6">
-            <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title"><a href="/restaurants/{{this._id}}">{{this.name}}</a></h5>
-                    <p class="card-text">{{this.address}}</p>
-                    <p class="card-text">Menu: {{this.foodmenu}}</p>
-                    <p class="card-text">Rating: {{this.rating}}</p>
-                </div>
-            </div>
-        </div>
-        <script src="../../public/javascript/filter.js"></script>
-    </div>
-    {{/each}}
-    <br>
-    <br>
-    <br>
-    <br>
-
-</main> --}}
-
 <div class="container-xxl py-5">
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
@@ -44,9 +21,10 @@
                     </div>
                     <div class="p-4">
                         <a class="d-block h5 mb-2 text-center" href="/restaurants/{{this._id}}">{{this.name}}</a>
-                        <p><span  class="text-primary me-1">Address:</span> {{this.address}}</p>
-                        <p><span  class="text-secondary me-1">Menu:</span> {{this.foodmenu}}</p>
-                        <p><span  class="bg-green me-1">Rating:</span> {{this.rating}}</p>
+                        <p><span class="text-primary me-1">Address:</span> {{this.address}}</p>
+                        <p><span class="text-secondary me-1">Menu:</span> {{this.foodmenu}}</p>
+                        <p><span class="bg-green me-1">Rating:</span> {{this.rating}}</p>
+                        <p><span class="text-primary me-1">Magicbox:</span> {{this.magicbox}}</p>
                         {{!-- <span class="text-body text-decoration-line-through">Address</span> --}}
                     </div>
                     <div class="d-flex border-top">
@@ -54,9 +32,6 @@
                             <a class="text-body" href="/restaurants/{{this._id}}"><i
                                     class="fa fa-eye text-primary me-2"></i>Visit Restaurant</a>
                         </div>
-                        {{!-- <small class="w-50 text-center py-2">
-                            <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Rate</a>
-                        </small> --}}
                     </div>
                 </div>
                 <script src="../../public/javascript/filter.js"></script>
