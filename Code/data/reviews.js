@@ -8,10 +8,14 @@ const customer = mongoCollections.customers;
 module.exports = {
     async create(restaurantId, customersId, reviewText, rating, profileImage, name) {
         rating = Number(rating)
+        if (!restaurantId) restaurantId = '';
         restaurantId = restaurantId.toString();
+        if (!customersId) customersId = '';
         customersId = customersId.toString();
+        if (!name) name = '';
         name = name.toString();
-        profileImage = img.toString('base64');
+        if (!profileImage) profileImage = '';
+        profileImage = profileImage.toString('base64');
         if (typeof restaurantId != 'string') throw 'No Restaurant with proper type has been provided'
         if (restaurantId == null || restaurantId.length == 0) throw 'No Restaurant has been selected'
         if (restaurantId.trim() == '') throw 'Restaurant Id provided contains only empty spaces'
@@ -36,7 +40,7 @@ module.exports = {
         let { ObjectId } = require('mongodb');
         let newObjId = ObjectId();
         if (!ObjectId.isValid(newObjId)) throw 'Object id is not valid'
-        let x = newObjId.toString();
+        // let x = newObjId.toString();
         let parsedId = ObjectId(restaurantId);
 
         const checkSal = await sal.findOne({ _id: parsedId })
@@ -302,5 +306,4 @@ module.exports = {
             return true;
         }
     }
-
 }
