@@ -2,12 +2,12 @@ const mongoCollections = require('../config/mongoCollections');
 const restaurants = mongoCollections.restaurants;
 let { ObjectId } = require('mongodb');
 
-const create = async function create(name, address, zip, foodmenu) {
+const create = async function create(name, address, zip, foodmenu, magicbox) {
     if (!name) throw 'You must provide a name for your restaurant';
     if (!address) throw 'You must provide a address for your restaurant';
 
     //To check name is null or empty
-    if (name.length == 0) {
+    if (name.length == 0 || name === null) {
         throw 'Name cannot be null or empty'
     }
     //To check name is string
@@ -15,7 +15,7 @@ const create = async function create(name, address, zip, foodmenu) {
         throw 'The entered name must be a string'
     }
     //To check address is null or empty
-    if (address.length == 0) {
+    if (address.length == 0 || address === null) {
         throw 'address cannot be null or empty'
     }
     //To check address is string
@@ -23,9 +23,20 @@ const create = async function create(name, address, zip, foodmenu) {
         throw 'The entered address must be a string'
     }
     //To check zip is null or empty
-    if (zip.length == 0) {
+    if (zip.length == 0 || zip === null) {
         throw 'stzipate cannot be null or empty'
     }
+    //To check magicbox is null or empty
+    if (magicbox.length == 0 || magicbox === null) {
+        throw 'Name cannot be null or empty'
+    }
+    //To check zip is number
+    if (typeof magicbox != "string") {
+        throw "The magicbox must be string!"
+    }
+    // if (magicbox < 0 || magicbox > 100) {
+    //     throw "The magicbox should be in he range of [0,100]!"
+    // }
     //To check zip is string
     if (typeof zip != 'string') {
         throw 'The entered zip must be a string'
@@ -59,6 +70,7 @@ const create = async function create(name, address, zip, foodmenu) {
         address: address,
         zip: zip,
         foodmenu: foodmenu,
+        magicbox: magicbox,
         rating: 0,
         reviewId: []
     };
@@ -133,11 +145,12 @@ const remove = async function remove(restaurantId) {
     return { deleted: true };
 }
 
-const update = async function update(restaurantId, name, address, zip, foodmenu) {
+const update = async function update(restaurantId, name, address, zip, foodmenu, magicbox) {
 
     if (!name) throw 'You must provide a name for your restaurant';
     if (!address) throw 'You must provide a address for your restaurant';
     if (!zip) throw 'You must provide a zip for your restaurant';
+    if (!magicbox) throw 'You must provide a magicbox for your restaurant';
     //To check name is null or empty
     if (name.length == 0) {
         throw 'Name cannot be null or empty'
@@ -154,6 +167,16 @@ const update = async function update(restaurantId, name, address, zip, foodmenu)
     if (typeof address != 'string') {
         throw 'The entered address must be a string'
     }
+    if (magicbox.length == 0 || magicbox === null) {
+        throw 'Name cannot be null or empty'
+    }
+    //To check zip is number
+    if (typeof magicbox != "string") {
+        throw "The magicbox must be string!"
+    }
+    // if (magicbox < 0 || magicbox > 100) {
+    //     throw "The magicbox should be in he range of [0,100]!"
+    // }
     //To check zip is null or empty
     if (zip.length == 0) {
         throw 'stzipate cannot be null or empty'
@@ -189,13 +212,14 @@ const update = async function update(restaurantId, name, address, zip, foodmenu)
         name: name,
         address: address,
         zip: zip,
-        foodmenu: foodmenu
+        foodmenu: foodmenu,
+        magicbox: magicbox
     };
 
     const updateRestaurantInfo = await restaurantCollection.updateOne({ _id: parsedId }, { $set: updatedRestaurantInfo });
 
     if (!updateRestaurantInfo.matchedCount && !updateRestaurantInfo.modifiedCount)
-        throw 'Update failed';
+        throw 'Update unsuccessfully!';
 
     var getParsedID = await this.get(restaurantId);
     const objCmp = JSON.parse(JSON.stringify(getParsedID));
