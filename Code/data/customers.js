@@ -1,5 +1,4 @@
 const mongoCollections = require('../config/mongoCollections');
-var mongo = require('mongodb');
 const customers = mongoCollections.customers;
 ObjectId = require('mongodb').ObjectId;
 const bcrypt = require('bcrypt');
@@ -7,25 +6,12 @@ const saltRounds = 16;
 
 
 module.exports = {
-    async checkDuplicate(un) {
-        const userCollection = await customers();
-        const user1 = await userCollection.find({}).toArray();
-        for (let i = 0; i < user1.length; i++) {
-            let str = user1[i].username.toString();
-            if (user1[i].username == un) {
-                console.log('************* Check duplicate username**********************');
-                return 0
-            }
-        }
-        return 1;
-    },
     async addUserProfilePicture(id, profilePicture) {
         if (!id) throw "User id is missing";
         var objRevId = ""
         if (typeof (id) === "string") objRevId = ObjectId.createFromHexString(id);
         const customerCollection = await customers();
         let updatedUserData = {};
-        let gotten = await this.getCustomerById(objRevId);
         updatedUserData.profilePicture = profilePicture;
         const updateInfoUser = await customerCollection.updateOne({ _id: objRevId }, { $set: updatedUserData });
         if (updateInfoUser.modifiedCount === 0 && updateInfoUser.deletedCount === 0) throw "Could not update customer";
@@ -105,8 +91,6 @@ module.exports = {
         if (!ObjectId.isValid(id)) {
             throw 'Not a valid ObjectId';
         }
-
-
         const customerCollection = await customers();
         const customer = await customerCollection.findOne({ _id: ObjectId(id) });
         if (customer === null) throw 'Customer does not exist';
