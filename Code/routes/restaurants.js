@@ -3,7 +3,7 @@ const router = express.Router();
 const data = require('../data');
 const restaurantsData = data.restaurants;
 const reviewsData = data.reviews;
-const customers = data.customers;
+// const customers = data.customers;
 const xss = require('xss');
 
 router.get('/restaurants', async (req, res) => {
@@ -32,8 +32,16 @@ router.get('/restaurants/:restaurantId', async (req, res) => {
         let restaurantsId = await restaurantsData.get(req.params.restaurantId);
         let getReviews = await reviewsData.getAllreviewsofRestaurant(req.params.restaurantId)
         console.log("getReviews", getReviews)
-
-        res.status(200).render("restaurants/restaurantprofile", { restaurantId: restaurantsId._id, name: restaurantsId.name, foodmenu: restaurantsId.foodmenu, address: restaurantsId.address, zip: restaurantsId.zip, rating: restaurantsId.rating, getReviews: getReviews });
+        res.status(200).render("restaurants/restaurantprofile", {
+            restaurantId: restaurantsId._id,
+            name: restaurantsId.name,
+            foodmenu: restaurantsId.foodmenu,
+            address: restaurantsId.address,
+            zip: restaurantsId.zip,
+            magicbox: restaurantsId.magicbox,
+            rating: restaurantsId.rating,
+            getReviews: getReviews
+        });
     } catch (e) {
         res.status(400).render("restaurants/error", { error: e });
     }
@@ -66,6 +74,7 @@ router.post('/post', async (req, res) => {
     restaurantInfo.foodmenu = xss(restaurantInfo.foodmenu)
     restaurantInfo.address = xss(restaurantInfo.address)
     restaurantInfo.zip = xss(restaurantInfo.zip)
+    restaurantInfo.magicbox = xss(restaurantInfo.magicbox)
 
     let errorcode = false;
     const errors = [];
@@ -81,7 +90,6 @@ router.post('/post', async (req, res) => {
         errorcode = true;
         res.status(400);
         return res.render("restaurants/restaurantsignup", { errorcode: errorcode, errors: errors, message: "Please provide a valid name" });
-
     }
     if (typeof restaurantInfo.name != 'string') {
         errorcode = true;
@@ -118,6 +126,16 @@ router.post('/post', async (req, res) => {
         res.status(400);
         return res.render("restaurants/restaurantsignup", { errorcode: errorcode, errors: errors, message: "Please provide a zip code in string" });
     }
+    if (!restaurantInfo.magicbox) {
+        errorcode = true;
+        res.status(400);
+        return res.render("restaurants/restaurantsignup", { errorcode: errorcode, errors: errors, message: "Please provide a valid magicbox number" });
+    }
+    if (typeof restaurantInfo.magicbox != 'string') {
+        errorcode = true;
+        res.status(400);
+        return res.render("restaurants/restaurantsignup", { errorcode: errorcode, errors: errors, message: "Please provide a magicbox in string" });
+    }
 
     try {
         const newRestaurant = await restaurantsData.create(
@@ -125,6 +143,7 @@ router.post('/post', async (req, res) => {
             restaurantInfo.address,
             restaurantInfo.zip,
             restaurantInfo.foodmenu,
+            restaurantInfo.magicbox,
         );
         console.log("newRestaurant", newRestaurant)
         res.status(200).render("restaurants/message", { message: "Restaurant created successfully" });
@@ -172,7 +191,6 @@ router.get('/restaurants/:restaurantId/delete', async (req, res) => {
         res.status(400).render("restaurants/error", { error: 'Restaurant not found' });
         return;
     }
-
 });
 
 router.post('/restaurants/:restaurantId/edit', async (req, res) => {
@@ -182,6 +200,7 @@ router.post('/restaurants/:restaurantId/edit', async (req, res) => {
     updatedData.address = xss(updatedData.address)
     updatedData.zip = xss(updatedData.zip)
     updatedData.foodmenu = xss(updatedData.foodmenu)
+    updatedData.magicbox = xss(updatedData.magicbox)
 
     let errorcode = false;
     const errors = [];
@@ -244,8 +263,18 @@ router.post('/restaurants/:restaurantId/edit', async (req, res) => {
         res.status(400);
         return res.render("restaurants/editrestaurant", { errorcode: errorcode, errors: errors, message: "Please provide a restaurant menu in string" });
     }
+    if (!updatedData.magicbox) {
+        errorcode = true;
+        res.status(400);
+        return res.render("restaurants/editrestaurant", { errorcode: errorcode, errors: errors, message: "Please provide a magicbox" });
+    }
+    if (typeof updatedData.magicbox != 'string') {
+        errorcode = true;
+        res.status(400);
+        return res.render("restaurants/editrestaurant", { errorcode: errorcode, errors: errors, message: "Please provide magicbox in string" });
+    }
 
-    if (!updatedData.name || !updatedData.address || !updatedData.zip || !updatedData.foodmenu) {
+    if (!updatedData.name || !updatedData.address || !updatedData.zip || !updatedData.foodmenu || !updatedData.magicbox) {
         errorcode = true;
         res.status(400);
         return res.render("restaurants/editrestaurant", { errorcode: errorcode, errors: errors, message: "Please enter all the fields" });
@@ -258,7 +287,13 @@ router.post('/restaurants/:restaurantId/edit', async (req, res) => {
         return;
     }
     try {
-        const updatedRestaurant = await restaurantsData.update(req.params.restaurantId, updatedData.name, updatedData.address, updatedData.zip, updatedData.foodmenu);
+        const updatedRestaurant = await restaurantsData.update(req.params.restaurantId,
+            updatedData.name,
+            updatedData.address,
+            updatedData.zip,
+            updatedData.foodmenu,
+            updatedData.magicbox,
+            req.params.restaurantId);
         res.render('restaurants/message', { message: "Updated successfully", updatedRestaurant: updatedRestaurant });
     } catch (e) {
         res.status(400).render("restaurants/error", { error: e });
@@ -283,7 +318,13 @@ router.get('/restaurants/:restaurantId/edit', async (req, res) => {
     }
     try {
         let restaurantsId = await restaurantsData.get(req.params.restaurantId);
-        res.status(200).render("restaurants/editrestaurant", { restaurantId: restaurantsId._id, name: restaurantsId.name, address: restaurantsId.address, zip: restaurantsId.zip });
+        res.status(200).render("restaurants/editrestaurant", {
+            restaurantId: restaurantsId._id,
+            name: restaurantsId.name,
+            address: restaurantsId.address,
+            zip: restaurantsId.zip,
+            magicbox: restaurantsId.magicbox
+        });
     } catch (e) {
         res.status(404).render("restaurants/error", { error: e });
     }
