@@ -2,12 +2,12 @@ const mongoCollections = require('../config/mongoCollections');
 const restaurants = mongoCollections.restaurants;
 let { ObjectId } = require('mongodb');
 
-const create = async function create(name, address, zip, array) {
+const create = async function create(name, address, zip, foodmenu, magicbox) {
     if (!name) throw 'You must provide a name for your restaurant';
     if (!address) throw 'You must provide a address for your restaurant';
 
     //To check name is null or empty
-    if (name.length == 0) {
+    if (name.length == 0 || name === null) {
         throw 'Name cannot be null or empty'
     }
     //To check name is string
@@ -15,7 +15,7 @@ const create = async function create(name, address, zip, array) {
         throw 'The entered name must be a string'
     }
     //To check address is null or empty
-    if (address.length == 0) {
+    if (address.length == 0 || address === null) {
         throw 'address cannot be null or empty'
     }
     //To check address is string
@@ -23,9 +23,20 @@ const create = async function create(name, address, zip, array) {
         throw 'The entered address must be a string'
     }
     //To check zip is null or empty
-    if (zip.length == 0) {
+    if (zip.length == 0 || zip === null) {
         throw 'stzipate cannot be null or empty'
     }
+    //To check magicbox is null or empty
+    if (magicbox.length == 0 || magicbox === null) {
+        throw 'Name cannot be null or empty'
+    }
+    //To check zip is number
+    if (typeof magicbox != "string") {
+        throw "The magicbox must be string!"
+    }
+    // if (magicbox < 0 || magicbox > 100) {
+    //     throw "The magicbox should be in he range of [0,100]!"
+    // }
     //To check zip is string
     if (typeof zip != 'string') {
         throw 'The entered zip must be a string'
@@ -40,19 +51,16 @@ const create = async function create(name, address, zip, array) {
     if (zip.trim().length == 0) {
         throw "zip cannot have spaces"
     }
-    // if (foodmenu.length == 0) {
-    //     throw 'Menu cannot be null or empty'
-    // }
+    if (foodmenu.length == 0) {
+        throw 'Menu cannot be null or empty'
+    }
+    if (typeof foodmenu != 'string') {
+        throw 'The entered menu must be a string'
+    }
+    if (foodmenu.trim().length == 0) {
+        throw "menu cannot have spaces"
+    }
 
-    // if (typeof foodmenu != 'string') {
-    //     throw 'The entered menu must be a string'
-    // }
-    // if (foodmenu.trim().length == 0) {
-    //     throw "menu cannot have spaces"
-    // }
-
-    
-    // console.log(foodmenu)
 
 
     const restaurantsCollection = await restaurants();
@@ -61,7 +69,8 @@ const create = async function create(name, address, zip, array) {
         name: name,
         address: address,
         zip: zip,
-        restaurantdishlist:[],
+        foodmenu: foodmenu,
+        magicbox: magicbox,
         rating: 0,
         reviewId: []
     };
@@ -78,16 +87,6 @@ const create = async function create(name, address, zip, array) {
     if (insertInfo.insertedCount === 0) throw 'Could not add restaurants';
 
     const newId = insertInfo.insertedId;
-
-    let restaurantdishlist=[]
-    for(let v of array)
-    {
-        restaurantdishlist.push({restaurant_id:ObjectId(newId),dishname:v[0],count:v[1]})
-    }
-
-    const updated=await restaurantsCollection.
-    updateOne({_id:ObjectId(newId)},{$set:{restaurantdishlist:restaurantdishlist}})
-
     const restaurant = await this.get(newId.toString());
     return JSON.parse(JSON.stringify(restaurant));
 }
@@ -146,11 +145,12 @@ const remove = async function remove(restaurantId) {
     return { deleted: true };
 }
 
-const update = async function update(restaurantId, name, address, zip, foodmenu) {
+const update = async function update(restaurantId, name, address, zip, foodmenu, magicbox) {
 
     if (!name) throw 'You must provide a name for your restaurant';
     if (!address) throw 'You must provide a address for your restaurant';
     if (!zip) throw 'You must provide a zip for your restaurant';
+    if (!magicbox) throw 'You must provide a magicbox for your restaurant';
     //To check name is null or empty
     if (name.length == 0) {
         throw 'Name cannot be null or empty'
@@ -167,6 +167,16 @@ const update = async function update(restaurantId, name, address, zip, foodmenu)
     if (typeof address != 'string') {
         throw 'The entered address must be a string'
     }
+    if (magicbox.length == 0 || magicbox === null) {
+        throw 'Name cannot be null or empty'
+    }
+    //To check zip is number
+    if (typeof magicbox != "string") {
+        throw "The magicbox must be string!"
+    }
+    // if (magicbox < 0 || magicbox > 100) {
+    //     throw "The magicbox should be in he range of [0,100]!"
+    // }
     //To check zip is null or empty
     if (zip.length == 0) {
         throw 'stzipate cannot be null or empty'
@@ -202,13 +212,14 @@ const update = async function update(restaurantId, name, address, zip, foodmenu)
         name: name,
         address: address,
         zip: zip,
-        foodmenu: foodmenu
+        foodmenu: foodmenu,
+        magicbox: magicbox
     };
 
     const updateRestaurantInfo = await restaurantCollection.updateOne({ _id: parsedId }, { $set: updatedRestaurantInfo });
 
     if (!updateRestaurantInfo.matchedCount && !updateRestaurantInfo.modifiedCount)
-        throw 'Update failed';
+        throw 'Update unsuccessfully!';
 
     var getParsedID = await this.get(restaurantId);
     const objCmp = JSON.parse(JSON.stringify(getParsedID));
@@ -216,7 +227,7 @@ const update = async function update(restaurantId, name, address, zip, foodmenu)
 }
 
 const getRestaurantViaSearch = async function getRestaurantViaSearch(search) {
-    // console.log("search*********", search)
+    console.log("search*********", search)
     if (!search) throw "Error (getRestaurantViaSearch): Must provide search.";
     if (typeof (search) !== "string") throw "Error (getRestaurantViaSearch): Search must be a string.";
     const restaurantCollection = await restaurants();
@@ -227,38 +238,6 @@ const getRestaurantViaSearch = async function getRestaurantViaSearch(search) {
     console.log("restaurantList", restaurantList);
     return restaurantList;
 }
-async function removeOneDishFromRestaurant(_id,dishname)
-{
-    // console. log('dsafd',restaurantname,dishname)
-    const restaurantCollection=await restaurants() 
-    const restaurant=await get(_id)
-    // console.log('dfas',restaurant)
-
-    let l=restaurant.restaurantdishlist
-    for(let i in l)
-    {
-        if(l[i].dishname===dishname)
-        {
-            if(l[i].count===1)l.splice(i,1)
-            else l[i].count-=1
-        }
-    }
-
-    updated=await restaurantCollection.updateOne({_id:ObjectId(_id)},{$set:{restaurantdishlist:l}})
-
-    const restaurant2=await get(_id)
-    // console .log('dafsd',restaurant2)
-
-    // console.log(await  this.getAllrestaurants())
-    return {removed:true}
-}
-async function getByNameAddress(restaurantname,restaurantaddress)
-{ 
-    const restaurantCollection=await restaurants()
-    const restaurant=await restaurantCollection.findOne({name:restaurantname,address:restaurantaddress})
-
-    return restaurant._id
-}
 
 module.exports = {
     create,
@@ -266,7 +245,5 @@ module.exports = {
     getAll,
     remove,
     update,
-    getRestaurantViaSearch,
-    removeOneDishFromRestaurant,
-    getByNameAddress 
+    getRestaurantViaSearch
 }

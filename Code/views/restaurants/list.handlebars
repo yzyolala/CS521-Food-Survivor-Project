@@ -1,16 +1,13 @@
 <div class="container-xxl py-5">
     <div class="container">
-        <div class="row g-0 gx-5">
-            <div class="col-lg-8">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-10">
                 <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s"
-                    style="max-width: 600px;">
+                    style="max-width: 500px;">
                     <h1 class="display-5 mb-6 text-secondary">Restaurants' <span class="bg-green">List</span></h1>
                     <p>View restaurants that have mind blowing food that is made with love and hygine. You can search
                         restaurants based on name or the menu you wish and be a food survivor.</p>
                 </div>
-            </div>
-            <div class="col-lg-4">
-                <a class="btn btn-primary rounded-pill py-3 px-5" href="/buying/pickRestaurant">Order Magic Box</a>
             </div>
         </div>
         <div class="row g-4">
@@ -24,22 +21,10 @@
                     </div>
                     <div class="p-4">
                         <a class="d-block h5 mb-2 text-center" href="/restaurants/{{this._id}}">{{this.name}}</a>
-                        <p><span  class="text-primary me-1">Address:</span> {{this.address}}</p>
-
-                        <p><span  class="text-secondary me-1">Menu:</span></p>
-                        <table> <th>restaurant</th><th>count</th>{{#each this.restaurantdishlist}}
-                            {{!-- <p><span  class="text-secondary me-1"></span> --}}
-                            
-                                <tr>
-                                    <td>{{this.dishname}} </td>
-                                    <td> {{this.count}}</td>
-                                </tr>
-                             </p>
-                            {{!-- <p><span  class="text-secondary me-1">count:</span> {{this.count}}</p> --}}
-                            {{!-- <br> --}}
-                        {{/each}} </table>
-                       <br>
-                        <p><span  class="bg-green me-1">Rating:</span> {{this.rating}}</p>
+                        <p><span class="text-primary me-1">Address:</span> {{this.address}}</p>
+                        <p><span class="text-secondary me-1">Menu:</span> {{this.foodmenu}}</p>
+                        <p><span class="bg-green me-1">Rating:</span> {{this.rating}}</p>
+                        <p><span class="text-primary me-1">Magicbox:</span> {{this.magicbox}}</p>
                         {{!-- <span class="text-body text-decoration-line-through">Address</span> --}}
                     </div>
                     <div class="d-flex border-top">
@@ -47,9 +32,6 @@
                             <a class="text-body" href="/restaurants/{{this._id}}"><i
                                     class="fa fa-eye text-primary me-2"></i>Visit Restaurant</a>
                         </div>
-                        {{!-- <small class="w-50 text-center py-2">
-                            <a class="text-body" href=""><i class="fa fa-shopping-bag text-primary me-2"></i>Rate</a>
-                        </small> --}}
                     </div>
                 </div>
                 <script src="../../public/javascript/filter.js"></script>
