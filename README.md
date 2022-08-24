@@ -51,11 +51,4 @@ PS: This is a mysterious and random provided food website. So, the users cannot 
 a. Displays username, profile pictures 
 b. Displays the restaurant this user has rated and saved. 
 
-Extra features:
-1.	The refer page:
-This page can show users a random code. They can use this code to invite their friends to register and get a 5 $ off coupon.
-2.	The donate page
-This page shows the pictures of hungry people all over the world. The users can donate money to these charities.
-3.	The join us page
-This page shows the email address that someone has interest to join our development team or volunteer team. 
 
