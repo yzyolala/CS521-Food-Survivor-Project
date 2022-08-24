@@ -1,35 +1,33 @@
-<main>
-    <div class="container">
-        <h1>Availabe Magic boxes</h1>
-        <form id="magic-box-update" class="center padding" action="/restaurants/{{this.restaurantId}}/editMagicbox" 
+<div class="container">
+    <h1>Availabe Magic boxes</h1>
+    <form id="magic-box-update" class="center padding" action="/restaurants/{{this.restaurantId}}/editMagicbox"
         method="POST">
-            <div class="form-group">
-                <label for="mbreakfast">Breakfast</label>
-                <input type="text" class="form-control" id="mbreakfast" name="mbreakfast" value="{{name}}"
-                    placeholder="No. of Magic Boxes">
-            </div>
-            <div class="form-group">
-                <label for="mlunch">Lunch</label>
-                <input type="text" class="form-control" id="mlunch" name="mlunch" value="{{address}}"
-                    placeholder="No. of Magic Boxes">
-            </div>
-            <div class="form-group">
-                <label for="msnacks">Snacks</label>
-                <input type="text" class="form-control" id="msnacks" name="msnacks" value="{{zip}}"
-                    placeholder="No. of Magic Boxes">
-            </div>
-            <div class="form-group">
-                <label for="mdinner">Dinner</label>
-                <input type="text" class="form-control" id="mdinner" name="mdinner" value="{{foodmenu}}"
-                    placeholder="No. of Magic Boxes">
-            </div>
-            <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
-            <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
-        </form>
+        <div class="form-group">
+            <label for="mbreakfast">Breakfast</label>
+            <input type="text" class="form-control" id="mbreakfast" name="mbreakfast" value="{{name}}"
+                placeholder="No. of Magic Boxes">
+        </div>
+        <div class="form-group">
+            <label for="mlunch">Lunch</label>
+            <input type="text" class="form-control" id="mlunch" name="mlunch" value="{{address}}"
+                placeholder="No. of Magic Boxes">
+        </div>
+        <div class="form-group">
+            <label for="msnacks">Snacks</label>
+            <input type="text" class="form-control" id="msnacks" name="msnacks" value="{{zip}}"
+                placeholder="No. of Magic Boxes">
+        </div>
+        <div class="form-group">
+            <label for="mdinner">Dinner</label>
+            <input type="text" class="form-control" id="mdinner" name="mdinner" value="{{foodmenu}}"
+                placeholder="No. of Magic Boxes">
+        </div>
+        <button type="submit" id="btn-id" class="btn btn-primary">Submit</button>
+        <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
+    </form>
 
-        {{#if errorcode}}
+    {{#if errorcode}}
 
-        <p class="error">{{message}}</p>
-        {{/if}}
-    </div>
-</main>
+    <p class="error">{{message}}</p>
+    {{/if}}
+</div>

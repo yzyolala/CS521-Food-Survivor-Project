@@ -1,6 +1,4 @@
-<div 
-class="container rounded bg-white mt-5 mb-5
-">
+<div class="container rounded bg-white mt-5 mb-5">
   <div class="row">
     <div class="col-md-3  border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
@@ -68,34 +66,38 @@ class="container rounded bg-white mt-5 mb-5
           <li>Rating: {{this.rating}}</li>
         </ul>
         {{/each}}<br>
-        
+
         <div class="">
           <h4 class="text-right">cart by you:</h4>
         </div>
         {{!-- {{cart}} --}}
         <table>
           <tr>
-            <th> name</th><th>  address </th><th>dish </th> <th>count</th>
-          </tr> 
-           {{#each cart}}
-           <tr>
-           <td>{{this.restaurantname}}</td>
-           <td>{{this.restaurantaddress}}</td><td>{{this.dishname}}</td>
-           <td>{{this.count}}</td>
-          {{!-- <ul> 
-            <li> {{this.restaurantname}}</li>
-            <li></li>
-            <li>address: </li>
-            <li>dishname:{{this.dishname}}</li>
-            <li>count: {{this.count}}</li>
-          </ul> --}}
-           </tr>
-           
-          
-        {{/each}}
+            <th> name</th>
+            <th> address </th>
+            <th>dish </th>
+            <th>count</th>
+          </tr>
+          {{#each cart}}
+          <tr>
+            <td>{{this.restaurantname}}</td>
+            <td>{{this.restaurantaddress}}</td>
+            <td>{{this.dishname}}</td>
+            <td>{{this.count}}</td>
+            {{!-- <ul>
+              <li> {{this.restaurantname}}</li>
+              <li></li>
+              <li>address: </li>
+              <li>dishname:{{this.dishname}}</li>
+              <li>count: {{this.count}}</li>
+            </ul> --}}
+          </tr>
+
+
+          {{/each}}
 
         </table>
-      
+
       </div>
     </div>
   </div>

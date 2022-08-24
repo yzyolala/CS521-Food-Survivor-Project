@@ -1,41 +1,38 @@
-<main>
-    <div class="container">
-        <h1>Edit a Restaurant</h1>
-        <form id="restaurant-signup-form" class="center padding" action="/restaurants/{{this.restaurantId}}/edit"
-            method="POST">
-            <div class="form-group">
-                <label for="name">Restaurant Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{name}}"
-                    placeholder="Enter Restaurant Name">
-            </div>
-            <div class="form-group">
-                <label for="address">Address:</label>
-                <input type="text" class="form-control" id="address" name="address" value="{{address}}"
-                    placeholder="Enter Address of restaurant">
-            </div>
-            <div class="form-group">
-                <label for="zip">Zip:</label>
-                <input type="text" class="form-control" id="zip" name="zip" value="{{zip}}"
-                    placeholder="Enter Zip code">
-            </div>
-            <div class="form-group">
-                <label for="foodmenu">Menu:</label>
-                <input type="text" class="form-control" id="foodmenu" name="foodmenu" value="{{foodmenu}}"
-                    placeholder="Enter restaurant menu">
-            </div>
-            <div class="form-group">
-                <label for="magicbox">Magicbox:</label>
-                <input type="text" class="form-control" id="magicbox" name="magicbox" value="{{magicbox}}"
-                    placeholder="Enter magicbox number">
-            </div>
-            <button type="submit" id="btn-id" class="btn btn-primary">Edit Restaurant</button>
-            <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
-        </form>
+<div class="container">
+    <h1>Edit a Restaurant</h1>
+    <form id="restaurant-signup-form" class="center padding" action="/restaurants/{{this.restaurantId}}/edit"
+        method="POST">
+        <div class="form-group">
+            <label for="name">Restaurant Name:</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{name}}"
+                placeholder="Enter Restaurant Name">
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" name="address" value="{{address}}"
+                placeholder="Enter Address of restaurant">
+        </div>
+        <div class="form-group">
+            <label for="zip">Zip:</label>
+            <input type="text" class="form-control" id="zip" name="zip" value="{{zip}}" placeholder="Enter Zip code">
+        </div>
+        <div class="form-group">
+            <label for="foodmenu">Menu:</label>
+            <input type="text" class="form-control" id="foodmenu" name="foodmenu" value="{{foodmenu}}"
+                placeholder="Enter restaurant menu">
+        </div>
+        <div class="form-group">
+            <label for="magicbox">Magicbox:</label>
+            <input type="text" class="form-control" id="magicbox" name="magicbox" value="{{magicbox}}"
+                placeholder="Enter magicbox number">
+        </div>
+        <button type="submit" id="btn-id" class="btn btn-primary">Edit Restaurant</button>
+        <h1><a class="logoutShiftLine" href="/restaurants">Go Back To restaurants</a></h1>
+    </form>
 
-        {{#if errorcode}}
+    {{#if errorcode}}
 
-        <p class="error">{{message}}</p>
-        {{/if}}
-        <a class="btn btn-primary" href="/logout">Logout</a>
-    </div>
-</main>
+    <p class="error">{{message}}</p>
+    {{/if}}
+    <a class="btn btn-primary" href="/logout">Logout</a>
+</div>

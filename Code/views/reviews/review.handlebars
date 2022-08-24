@@ -1,29 +1,25 @@
-<main>
-    <div class="center">
-        <p><a href="/restaurants">Go back to Restaurant list page</a></p>
-        <div class="center padding">
-            <h1>Restaurant Review</h1>
-            <form id="restaurant-review-form" class="center padding" action="/reviews/{{this.restaurantId}}"
-                method="POST">
-                <label>
-                    <p>Restaurant name:</p>
-                    <input id="name" name="name" placeholder="Restaurant Name" />
-                </label>
-                <label>
-                    <p>Your Review:</p>
-                    <input id="reviewText" name="reviewText" placeholder="Space for entering Review" />
-                </label>
-                <label>
-                    <p> Rating:</p>
-                    <input id="rating" name="rating" placeholder="Rating: 1-10" />
-                </label>
+<div class="center">
+    <p><a href="/restaurants">Go back to Restaurant list page</a></p>
+    <div class="center padding">
+        <h1>Restaurant Review</h1>
+        <form id="restaurant-review-form" class="center padding" action="/reviews/{{this.restaurantId}}" method="POST">
+            <label>
+                <p>Restaurant name:</p>
+                <input id="name" name="name" placeholder="Restaurant Name" />
+            </label>
+            <label>
+                <p>Your Review:</p>
+                <input id="reviewText" name="reviewText" placeholder="Space for entering Review" />
+            </label>
+            <label>
+                <p> Rating:</p>
+                <input id="rating" name="rating" placeholder="Rating: 1-10" />
+            </label>
 
-                <button type="submit" id="btn-id">Submit</button>
-            </form>
-        </div>
-        <div id="error-div">
-            <p class="error">{{message}}</p>
-        </div>
+            <button type="submit" id="btn-id">Submit</button>
+        </form>
     </div>
-    <a class="btn btn-primary" href="/logout">Logout</a>
-</main>
+    <div id="error-div">
+        <p class="error">{{message}}</p>
+    </div>
+</div>
