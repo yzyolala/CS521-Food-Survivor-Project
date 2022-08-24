@@ -1,20 +1,37 @@
 const mongoCollections = require('../config/mongoCollections');
+var mongo = require('mongodb');
 const customers = mongoCollections.customers;
-ObjectId = require('mongodb').ObjectId;
-const bcrypt = require('bcrypt');
-const saltRounds = 16;
 
+const restaurants=require('./restaurants')
+
+// ObjectId = require('mongodb').ObjectId;
+const bcrypt = require('bcrypt');
+const saltRounds = 7;
+let { ObjectId } = require('mongodb');
 
 module.exports = {
+    async checkDuplicate(un) {
+        const userCollection = await customers();
+        const user1 = await userCollection.find({}).toArray();
+        for (let i = 0; i < user1.length; i++) {
+            let str = user1[i].username.toString();
+            if (user1[i].username == un) {
+                console.log('************* Check duplicate username**********************');
+                return 0
+            }
+        }
+        return 1;
+    },
     async addUserProfilePicture(id, profilePicture) {
         if (!id) throw "User id is missing";
         var objRevId = ""
         if (typeof (id) === "string") objRevId = ObjectId.createFromHexString(id);
         const customerCollection = await customers();
         let updatedUserData = {};
+        let gotten = await this.getCustomerById(objRevId);
         updatedUserData.profilePicture = profilePicture;
         const updateInfoUser = await customerCollection.updateOne({ _id: objRevId }, { $set: updatedUserData });
-        if (updateInfoUser.modifiedCount === 0 && updateInfoUser.deletedCount === 0) throw "Could not update customer";
+        if (updateInfoUser.modified··Count === 0 && updateInfoUser.deletedCount === 0) throw "Could not update customer";
         return await this.getCustomerById(id);
     },
 
@@ -91,6 +108,8 @@ module.exports = {
         if (!ObjectId.isValid(id)) {
             throw 'Not a valid ObjectId';
         }
+
+
         const customerCollection = await customers();
         const customer = await customerCollection.findOne({ _id: ObjectId(id) });
         if (customer === null) throw 'Customer does not exist';
@@ -211,14 +230,15 @@ module.exports = {
                 profilePicture: profilePicture,
                 age: age,
                 reviewId: [],
-                commentIds: []
+                commentIds: [],
+                cart:[]
 
             };
 
             const insertInfo = await usersCollection.insertOne(newUser);
             if (insertInfo.insertedCount === 0) throw 'We cannot add a new user.';
             console.log("{ userInserted: true }");
-            return { userInserted: true };
+            return this.getCustomerById(insertInfo.insertedId);
         } catch (error) {
             console.log(error)
         }
@@ -260,5 +280,50 @@ module.exports = {
         else {
             throw "Either the username or password is invalid"
         }
-    }
+    } ,
+    async addDishToUser(_id,restaurantname,restaurantaddress,dishname)
+    {
+        const user=await this.getCustomerById(_id)
+        // console. log(user)
+        let l=user.cart
+        
+        let has=false
+        for(let i in l)
+        {
+            if(l[i].restaurantname===restaurantname &&  
+                l[i].restaurantaddress===restaurantaddress &&l[i].dishname===dishname) 
+            {
+                has=true
+                l[i].count+=1
+                break
+            }
+        }
+        // const restaurantsF=await mongoCollections.restaurants
+        // const restaurantCollection=await restaurantsF()
+        const restaurant_id=await restaurants.getByNameAddress(restaurantname,restaurantaddress)
+        // ( restaurantname,restaurantaddress)
+
+        const restaurant=await restaurants.get(restaurant_id.toString())
+        console.log('sarrr',restaurant)
+
+        if(!has)l.push(
+        
+        {restaurantname:restaurantname,restaurantaddress:restaurantaddress ,
+        dishname:dishname,count:1})
+        // user.cart=l
+        // console.log('sss',user)
+        
+        const userCollection=await customers()
+        
+        // const customer = await userCollection.findOne({ _id: ObjectId(_id) });
+        // console.log('sssss',customer )
+
+        const updated=await userCollection.updateOne({_id:ObjectId(_id)},{$set:{cart:l}})
+        // console.log(updated)
+
+        const newuser=await this.getCustomerById(_id)
+        // req.session.customer=newuser
+        console.log ('aats',newuser)
+        return {added:true,newuser:newuser}
+    },
 };

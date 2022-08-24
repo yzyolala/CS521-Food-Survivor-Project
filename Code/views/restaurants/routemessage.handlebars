@@ -1,15 +1,9 @@
-<div class="container-fluid bg-primary bg-icon mt-5 py-6">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
-                <p>{{message}}</p>
-            </div>
-            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
-                {{#if message}}
-                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="/login">Login</a>
-                {{/if}}
-                {{!-- <a class="btn btn-primary" href="/logout">Logout</a> --}}
-            </div>
-        </div>
+<main>
+    <div>
+        <p>{{message}}</p>
     </div>
-</div>
+    {{#if message}}
+    <a class="logoutShiftLine" href="/">login</a>
+    {{/if}}
+    
+</main>

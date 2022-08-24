@@ -59,3 +59,5 @@ This page shows the pictures of hungry people all over the world. The users can 
 3.	The join us page
 This page shows the email address that someone has interest to join our development team or volunteer team. 
 
+Github Link:
+https://github.com/yzyolala/CS546-Food-Survivor-Project

@@ -1,6 +1,8 @@
-<div class="container rounded bg-white mt-5 mb-5">
+<div 
+class="container rounded bg-white mt-5 mb-5
+">
   <div class="row">
-    <div class="col-md-3 border-right">
+    <div class="col-md-3  border-right">
       <div class="d-flex flex-column align-items-center text-center p-3 py-5">
         <img class="rounded-circle mt-5" width="150px" src="/profilepic/{{id}}"
           onerror="this.src='/public/image/default-user.jpeg'" alt="Profile Picture">
@@ -17,7 +19,7 @@
         <span class="py-3"> <a href="/delete" class="btn btn-danger">Delete Account</a></span>
       </div>
     </div>
-    <div class="col-md-5 border-right">
+    <div class="col-md-4 border-right">
       <div class="p-3 py-5">
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="text-right">Profile Settings</h4>
@@ -53,18 +55,47 @@
         </form>
       </div>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-5">
       <div class="p-3 py-5">
+
         <div class="d-flex justify-content-between align-items-center mb-3">
           <h4 class="text-right">Reviews by you</h4>
         </div>
         {{#each this.getReviews}}
-        <h6>{{this.name}}</h6>
+        <h6>{{this.restaurantId}}</h6>
         <ul>
           <li>Review: {{this.reviewText}}</li>
           <li>Rating: {{this.rating}}</li>
         </ul>
+        {{/each}}<br>
+        
+        <div class="">
+          <h4 class="text-right"> order by you:</h4>
+        </div>
+        {{!-- {{cart}} --}}
+        <table>
+          <tr>
+            <th> name</th><th>  address </th><th>dish </th> <th>count</th>
+          </tr> 
+           {{#each cart}}
+           <tr>
+           <td>{{this.restaurantname}}</td>
+           <td>{{this.restaurantaddress}}</td><td>{{this.dishname}}</td>
+           <td>{{this.count}}</td>
+          {{!-- <ul> 
+            <li> {{this.restaurantname}}</li>
+            <li></li>
+            <li>address: </li>
+            <li>dishname:{{this.dishname}}</li>
+            <li>count: {{this.count}}</li>
+          </ul> --}}
+           </tr>
+           
+          
         {{/each}}
+
+        </table>
+      
       </div>
     </div>
   </div>

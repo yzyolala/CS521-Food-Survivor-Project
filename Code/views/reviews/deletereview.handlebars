@@ -1,16 +1,12 @@
-<div class="container-fluid bg-primary bg-icon mt-5 py-6">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-5 text-white mb-3">Successfully deleted your review</h1>
-                <h3 class="text-white mb-0">Restaurant will be deleted on Restaurant List page</h3>
-                <p>{{message}}</p>
-            </div>
-            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
-                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="/restaurants">Go Back</a>
-                {{#if message}}
-                {{/if}}
-            </div>
+<main>
+    <div class="card-full container">
+        <p><a href="/restaurants">Go back to Restaurant list page</a></p> <br>
+        <h1>Successfully deleted your review!</h1>
+        <div>
+            <p>{{message}}</p>
         </div>
+        {{#if message}}
+        {{/if}}
+        
     </div>
-</div>
+</main>

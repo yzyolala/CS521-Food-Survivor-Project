@@ -1,20 +1,31 @@
 const { ObjectId } = require("mongodb");
-//const { customers } = require(".");
-
 const mongoCollections = require("../config/mongoCollections");
 const comments = mongoCollections.comments;
 const reviews = mongoCollections.reviews;
 const customers = mongoCollections.customers;
 
+
 module.exports = {
+
+	async checkpara(x) {
+        if (typeof x != 'string') throw 'The type of ' + x + ' type is wrong';
+        if (x == null || x.length == 0) throw 'You input nothing'
+        if (x.trim() == '') throw 'There are some blanks in your input.'
+    },
+
 	async addComment(customerId, reviewId, commentText) {
-		console.log(customerId, reviewId, commentText);
-		if (!customerId || typeof customerId != "string")
-			throw "customerId must be given as a string";
-		if (!reviewId || typeof reviewId != "string")
-			throw "reviewId must be given as a string";
+
+		// if (!customerId || typeof customerId != "string")
+		// 	throw "customerId must be given as a string";
+		// if (!reviewId || typeof reviewId != "string")
+		// 	throw "reviewId must be given as a string";
 		if (!commentText || typeof commentText != "string")
 			throw "must give comment text as a string";
+
+		
+		this.checkpara(customerId);
+		this.checkpara(reviewId);
+
 		const commentCollection = await comments();
 		let newComment = {
 			customerId: customerId,
@@ -45,10 +56,6 @@ module.exports = {
 			{ _id: parsedId },
 			{ $push: { commentIds: newComment._id } }
 		);
-		//const newId = insertInfo.insertedId;
-		//const newIDString = String(newId);
-		//const recentComment = await this.getComment(newIDString);
-		console.log(finComment);
 		return finComment;
 	},
 	async getAllComments() {
@@ -67,8 +74,10 @@ module.exports = {
 	},
 	// Find all the comments of a specific customerId returns an array of comments
 	async getCommentsForCustomer(customerId) {
-		if (!customerId || typeof customerId !== "string")
-			throw "customerId is invalid";
+		// if (!customerId || typeof customerId !== "string")
+		// 	throw "customerId is invalid";
+
+		this.checkpara(customerId);
 		let parsedId = ObjectId(customerId);
 		const customerCollection = await customers();
 		const customer = await customerCollection.findOne({ _id: parsedId });
@@ -86,9 +95,9 @@ module.exports = {
 		for (i in commentsForCustomers) {
 			finalComments = commentsForCustomers[i].commentText;
 		}
-		console.log(finalComments);
 		return finalComments;
 	},
+	
 	// Find all the comments of a specific reviewId returns an array of comments
 	async getCommentsForReview(reviewId) {
 		if (!reviewId || typeof reviewId !== "string") throw "reviewId is invalid";
@@ -117,8 +126,8 @@ module.exports = {
 	//comments for a reviews
 	async removeComment(id) {
 		id = id.toString();
-
-		if (!id || typeof id != "string") throw "id must be given as a string";
+		this.checkpara(id);
+		// if (!id || typeof id != "string") throw "id must be given as a string";
 		const commentCollection = await comments();
 		let comment = await this.getComment(id);
 
@@ -162,9 +171,8 @@ module.exports = {
 		if (!commentText || typeof commentText !== "string")
 			throw "The text of the comment is invalid";
 		const updatedCommentData = {};
-		if (!commentText) {
-			throw "Please Enter a Comment";
-		} else {
+		if (!commentText) throw "Please Enter a Comment";
+		else {
 			updatedCommentData.commentText = commentText;
 		}
 

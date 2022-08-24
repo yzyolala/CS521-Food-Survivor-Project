@@ -8,27 +8,23 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav ms-auto p-4 p-lg-0">
       <a href="/restaurants" class="nav-item nav-link active">Restaurants</a>
-      <a href="/buying/pickRestaurant" class="nav-item nav-link">Order</a>
       <a href="../../public/html/about.html" class="nav-item nav-link">About Us</a>
-      <div class="nav-item dropdown">
-        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Other</a>
-        <div class="dropdown-menu m-0">
-          <a href="../../public/html/faq.html" class="dropdown-item">FAQs</a>
-          <a href="../../public/html/credits.html" class="dropdown-item">Credits</a>
-        </div>
-      </div>
+
+      <a href="/buying/pickRestaurant" class="nav-item nav-link">Order</a>
+
+
     </div>
   </div>
   <div class="d-none d-lg-flex ms-2 new-post-form">
     <form action="/search" method="POST" class="d-flex" role="search">
       {{ data.name }}
-      <input class="form-control me-2 search-box-container" type="search" placeholder="Search for Menu or Restaurant"
+      <input class="form-control me-2 search-box-container" type="search" placeholder="Search Restaurant"
         name="name" value="{{data.name}}" id="search">
       <button class="btn btn-outline-success btn-round" type="submit" id="navStyle">Search</button>
     </form>
     <div class="nav-item">
       <a href="#" class="nav-link btn-sm-square bg-white rounded-circle ms-3" data-bs-toggle="dropdown"><small
-          class="fa fa-user text-body"></small></a>
+        class="fa fa-user text-body"></small></a>
       <div class="dropdown-menu m-0">
         <a href="/" class="dropdown-item">View Profile</a>
         <a href="/logout" class="dropdown-item">Sign out</a>

@@ -1,19 +1,36 @@
-<div class="container-fluid bg-primary bg-icon mt-5 py-6">
-    <div class="container">
-        <div class="row g-5 align-items-center">
-            {{#if restaurant.restaurantdishlist}}
-            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-5 text-white mb-3">{{restaurant.name}} has </h1>
-                {{#each restaurant.restaurantdishlist}}
-                <h3 class="text-white mb-0">{{this.dishname}} of count {{this.count}}</h3>
-                {{/each}}
-                {{else}}
-                <h3>{{restaurant.name}} has no dishes then.</h3>
-                {{/if}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    {{!-- <h3 class= "welcomeTo">You have successfully order 1 from {{restaurant.name}}.</h3> --}}
+
+    {{#if restaurant.restaurantdishlist}}
+    <h3 class= "welcomeTo">{{restaurant.name}} has </h3>
+     {{#each restaurant.restaurantdishlist}}
+        <p>{{this.dishname}} of count {{this.count}}</p>
+     {{/each}}
+    {{else}}
+    <h3>{{restaurant.name}} has no dishes then.</h3>
+    {{/if}}
+    
+    <a href="/users/private" class="home">view your shopping cart</a>
+    {{!-- <div class="container">
+        <h3>Your order infomation</h3>
+        <div class="center padding" id="login">
+            <div class="form-group">
+                <p class="">restaurant: {{restaurantname}}</p>
             </div>
-            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
-                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="/users/private">View Cart</a>
+            <div class="form-group">
+                <p class=" ">dish: {{restaurantname}}</p>
+            </div>
+            <div class="form-group">
+                <p>count: 1</p>
             </div>
         </div>
-    </div>
-</div>
+    </div> --}}
+</body>
+</html>
