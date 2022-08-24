@@ -1,13 +1,16 @@
-<main>
-    <div class="card container" id="cont">
-        <h1>Your Action was successful</h1>
-        <h3>Restaurant will be listed on Restaurant List page</h3>
-        <div>
-            <p>{{message}}</p>
+<div class="container-fluid bg-primary bg-icon mt-5 py-6">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="display-5 text-white mb-3">Successfull!</h1>
+                <h3 class="text-white mb-0">Restaurant will be listed on Restaurant List page</h3>
+                <p>{{message}}</p>
+            </div>
+            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
+                {{#if message}}
+                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="/restaurants">Go Back</a>
+                {{/if}}
+            </div>
         </div>
-        {{#if message}}
-        <a class="logoutShiftLine" href="/restaurants">Go to the restaurants</a>
-        {{/if}}
     </div>
-    <a class="btn btn-primary" href="/logout">Logout</a>
-</main>
+</div>

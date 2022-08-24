@@ -36,10 +36,10 @@ app.use(async(req, res, next) => {
     const requestRoute = req.originalUrl;
     if (req.session.user) {
         console.log(
-            `[ ${currentTimestamp} ] :  ${requestMethod} ${requestRoute} (Authenticated User)`)
+            `[${currentTimestamp}]: ${requestMethod} ${requestRoute} (Authenticated User)`)
     } else {
         console.log(
-            `[ ${currentTimestamp} ] :  ${requestMethod} ${requestRoute} (Non-Authenticated User)`)
+            `[${currentTimestamp}]: ${requestMethod} ${requestRoute} (Non-Authenticated User)`)
     }
     next();
 })

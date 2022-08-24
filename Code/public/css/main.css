@@ -1,10 +1,13 @@
 body {
+    /* background-color: rgb(57, 59, 59); */
     background-image: url('../image/restaurant_img.jpg');
     width: 100%;
     height: 100%;
+    /* margin: 0; */
+    /* padding-top: 15px; */
+    /* background: url('../image/restaurantimage.jpg'); */
     background-size: 100%;
     background-attachment: fixed;
-    /* background-color: #00C58E */
 }
 
 .center {
@@ -48,6 +51,20 @@ a {
 }
 
 
+/* dl {
+    color: wheat;
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+}
+
+dd {
+    color: wheat;
+    text-align: center;
+    font-weight: 600;
+    font-size: 30px;
+} */
+
 p.logout {
     color: wheat;
     text-align: center;
@@ -78,6 +95,22 @@ p.logout {
     top: 10%;
 }
 
+.dropbtn {
+    background-color: #fafafae0;
+    color: #558000;
+    font-size: large;
+    box-sizing: border-box;
+    border: 2px solid #558000;
+    border-radius: 5em;
+    padding: 8px;
+    margin: 15px;
+    text-align: center;
+}
+
+.dropbtn:hover {
+    color: #fafafae0;
+    background-color: #6ca000;
+}
 
 .dropdown {
     position: relative;
@@ -123,6 +156,7 @@ p.logout {
     margin-top: 100px;
     margin-bottom: 100px;
     width: 100%;
+    /* height:100%; */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -153,6 +187,23 @@ p.logout {
 .btn-private {
     margin: 4px;
     margin-top: 15px;
+}
+
+.like,
+.dislike {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: lightgreen;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    border-radius: 4px;
 }
 
 .qty1,
@@ -494,3 +545,4 @@ h3.large-heading {
     color: #00C58E;
     text-decoration: none
 }
+

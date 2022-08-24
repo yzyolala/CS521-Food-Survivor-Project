@@ -2,7 +2,7 @@ const MongoClient = require('mongodb').MongoClient;
 const settings = {
     mongoConfig: {
         serverUrl: 'mongodb://localhost:27017/',
-        database: 'Group_4_Food_Survivor'
+        database: 'Group_4_FoodSurvior_Project'
     }
 };
 const mongoConfig = settings.mongoConfig;

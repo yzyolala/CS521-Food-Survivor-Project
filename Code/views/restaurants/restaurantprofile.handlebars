@@ -1,4 +1,5 @@
 <main>
+
     <div class="container rounded bg-white mt-5 mb-5">
         <div class="row">
             <div class="col-md-3 border-right">
@@ -7,10 +8,18 @@
                         <h4 class="text-right">Restaurant details</h4>
                     </div>
                     <div class="d-flex flex-column align-items-center text-center p-3 py-5">
-                        <span class="font-weight-bold">Name: {{this.name}}</span><br>
+                        <span class="font-weight-bold">Name: {{this.name}}</span>
                         <p class="card-text bold-id">Address: {{this.address}} ,{{this.zip}}</p>
-                        <p class="card-text bold-id">Rating: {{this.rating}}</p>
-                        <p class="card-text bold-id">Magicbox: {{this.magicbox}}</p>
+                        <p class="card-text bold-id">Rating: {{this.rating}}</p><br>
+                        {{!-- <div class="col-md-12">
+                            <form action="/upload/profilepic" enctype="multipart/form-data" method="POST">
+                                <label for="picture" class="labels">Change profile image</label>
+                                <input type="file" name="picture" accept="image/*" class="btn  bottom-padding"
+                                    required />
+                                <input type="submit" class="btn-private btn btn-primary" value="Upload Photo" />
+                            </form>
+                        </div> --}}
+
                     </div>
                 </div>
             </div>
@@ -19,7 +28,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="text-right">Restaurant Menu</h4>
                     </div>
-                    <p class="card-text bold-id">{{this.foodmenu}}</p>
+                    <p class="card-text bold-id">{{this.magicbox}}</p>
                 </div>
             </div>
             <div class="col-md-4">
@@ -38,6 +47,7 @@
                             </div>
                         </div>
                     </form>
+
                 </div>
             </div>
         </div>
@@ -45,6 +55,17 @@
 
 
     <div class="container" id="review-pan">
+
+        {{!-- <h3 class="text-secondary">Post a response to customer here:</h3>
+        <form action="/comments/add/{{this._id}}" method="POST" class="new-comment-form">
+            <div class="form-group">
+                <input id="comment" type="text" class="form-control" name="commentText"
+                    placeholder="Enter a comment....">
+
+            </div>
+            <button id="submit" class="btn btn-primary" type="submit">Submit</button>
+        </form> --}}
+
         <section>
             <div class="container">
                 <div class="row">
@@ -72,6 +93,7 @@
                                 <li>
                                     <p>{{this}}</p>
                                 </li>
+
                             </ul>
                             {{/each}}
 
@@ -80,7 +102,8 @@
                                 <form action="/comments/add/{{this._id}}" method="POST" class="new-comment-form">
                                     <div class="form-group">
                                         <input id="comment" type="text" class="form-control" name="commentText"
-                                            placeholder="Enter a comment plz">
+                                            placeholder="Enter a comment....">
+
                                     </div>
                                     <button id="submit" class="btn btn-primary" type="submit">Submit</button>
                                 </form>
@@ -100,9 +123,7 @@
                                 <input type="text" class="form-control" id="reviewText" name="reviewText"
                                     aria-describedby="reviewText" placeholder="Add your review">
                             </div>
-                            <div class="form-group">
-                                <button type="submit" id="btn-id" class="btn btn-primary">Post your review</button>
-                            </div>
+                            <button type="submit" id="btn-id" class="btn btn-primary">Post your review</button>
                         </form>
                         {{#if errorcode}}
                         <p class="error">{{message}}</p>

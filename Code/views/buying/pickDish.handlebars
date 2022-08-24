@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>pickDish</title>
+</head>
+<body>
+    <div class="container" style="width:80rem ;"> 
+        
+        {{!-- <p>_id is:{{_id}}</p> --}}
+         {{#each restaurant.restaurantdishlist}}
+        <div class=""> 
+            <table >
+                <tr>
+                        <td style="width: 13rem;"> 
+                    <a href="/buying/finishPickingDish/{{this.restaurant_id}}/{{this.dishname}}">
+                        {{this.dishname}}
+                    </a>
+                </td>
+                <td>
+                     please note only {{this.count}} remained in {{this.dishname}}!
+                </td>
+                </tr>
+             
+            </table>
+        </div>
+        {{/each}}
+        <br>
+    </div>
+  
+    
+    {{!-- <a href="/home">home</a> --}}
+</body>
+</html>

@@ -10,7 +10,7 @@ const reviewsData = require('../data/reviews');
 const salData = require('../data/restaurants')
 
 const bcrypt = require('bcrypt');
-const saltRounds = 16;
+const saltRounds = 7;
 const multer = require('multer');
 const path = require('path');
 
@@ -112,6 +112,7 @@ router.get('/delete', async (req, res) => {
 
 
 router.get("/", (req, res) => {
+    console.log('dsaf')
     if (!req.session.AuthCookie)
         res.render("users/login", { title: "Login", heading: "Login" });
     else
@@ -459,7 +460,13 @@ router.get("/private", async (req, res) => {
     if (!req.session.AuthCookie) {
         res.redirect('/');
     } else {
+
+        console .log('aaaad',req.session.customer)
         const getReviews = await reviewsData.getReviewsPerCustomer(req.session.user.id);
+        const user=await users.getCustomerById(req.session.user.id)
+        console.log('sssssa',user )
+        req.session.customer=user
+        console.log('sdfsds',req.session.customer.cart)
         console.log(getReviews, 'getReviews************')
         res.render('users/private', {
             id: req.session.user.id,
@@ -469,7 +476,8 @@ router.get("/private", async (req, res) => {
             age: req.session.customer.age,
             email: req.session.customer.email,
             password: req.session.customer.password,
-            getReviews: getReviews,
+            getReviews: getReviews,  
+            cart:req.session.customer.cart
         });
     }
 });

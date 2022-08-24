@@ -1,31 +1,5 @@
-{{!-- <main>
-
-    {{#each data}}
-    <div class="card-deck">
-        <div class="col-sm-6">
-            <div class="card" style="width: 18rem;">
-                <img class="card-img-top">
-                <div class="card-body">
-                    <h1>List restaurants</h1>
-                    <h5 class="card-title"><a href="/restaurants/{{this._id}}">{{this.name}}</a></h5>
-                    <p class="card-text">{{this.address}}</p>
-                    <p class="card-text">Menu: {{this.menu}}</p>
-                    <p class="card-text">Rating: {{this.rating}}</p>
-
-                </div>
-            </div>
-        </div>
-    </div>
-    {{/each}}
-    {{#if data}}
-    {{else}}
-    <h1 class="not-found">We're sorry, but no results were found {{this.name}}.Please search again</h1>
-    {{/if}}
-
-    <a class="btn btn-primary" href="/logout">Logout</a>
-</main> --}}
-
 <div class="container-xxl py-5">
+    {{#each data}}
     <div class="container">
         <div class="row g-0 gx-5 align-items-end">
             <div class="col-lg-6">
@@ -37,7 +11,6 @@
             </div>
         </div>
         <div class="row g-4">
-            {{#each data}}
             <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                 <div class="product-item">
                     <div class="position-relative bg-light overflow-hidden">
@@ -61,12 +34,21 @@
                     </div>
                 </div>
             </div>
-            {{/each}}
-            {{#if data}}
-            {{else}}
-            <h3 class="not-found">We're sorry, but no results were found. Please
-                search again!</h3>
-            {{/if}}
         </div>
     </div>
+    {{/each}}
+    {{#if data}}
+    {{else}}
+    <div class="container-xxl py-6 wow fadeInUp" data-wow-delay="0.1s">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
+                    <h1 class="display-1">We're sorry, but no results were found. Please
+                        search again!</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/if}}
 </div>

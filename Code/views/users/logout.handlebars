@@ -1,9 +1,16 @@
-<main>
-    <h1>Successfully See you next time!</h1>
-    <div>
-        <p class="logout">{{message}}</p>
+<div class="container-fluid bg-primary bg-icon mt-5 py-6">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="display-5 text-white mb-3">Successfully Logged out</h1>
+                <h3 class="text-white mb-0">See you next time!</h3>
+                <p>{{message}}</p>
+            </div>
+            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
+                {{#if message}}
+                <a class="btn btn-lg btn-secondary rounded-pill py-3 px-5" href="/">Login</a>
+                {{/if}}
+            </div>
+        </div>
     </div>
-    {{#if message}}
-    <a class="logoutShiftLine" href="/">Login</a>
-    {{/if}}
-</main>
+</div>
