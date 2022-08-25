@@ -1,30 +1,27 @@
 # CS546-Food-Survivor-Project
-Final Project Proposal for Group 4
+Final Project Proposal for **Group 4**
 
-Members:
+| Group Members |CWID  |
+|--|--|
+|Chaitanya Pawar| 20008880
+|Deke He | 10477400
+| Barun Roy | 10469915
+| Zhenying Yu| 20009719 |
 
-Zhenying Yu
+## Name of the project
+**Food Survivor**
 
-Chaitanya Pawar
-
-Deke He
-
-Roy Barun
-
-Name of the project: 
-Food Survivor
-
-Description:
+## Description
 The purpose of Food Survivor is to reduce food waste in Hoboken and Jersey City. It is a useful website that connects restaurants and stores which have unsold, surplus food, with customers who can then buy whatever food the outlet considers surplus to requirements—without being able to choose—at a much lower price than normal. The food on the website is priced at one-third its original price. The potential customer runs the Food Survivor website, which shows what outlets have what sort of food (baked foods, meals, produce, vegan food). available within a certain radius and in a specified timeslot, usually for 30 minutes or more. The customer can then purchase and collect a' magic box' within the designated timeslot.
  
-Significance:
+## Significance
 This website will help reduce the waste of food that would otherwise be discarded; food waste is a global problem that affects the environment.
 
-Feature sections:
+## Feature sections
 1.	This website support that the store or shop owners to submit their food information to the website server and stored in the mongodb. Also, the customers can submit their comment about the store and food to the server.
 2.	It also has the search functions. Users can search stores by sending the request to the web server. And then the web server receives the request and find the information from database and response it.
 
-Constructure:
+## Constructure
 1. The Welcome Page 
 a. Use some beautiful and relevant pictures to let users know the purpose and basic functions of this website. 
 b. There are the buttons of register, login and search, which linked to the corresponding pages.
@@ -52,5 +49,5 @@ a. Displays username, profile pictures
 b. Displays the restaurant this user has rated and saved. 
 
 
-Github Link:
-https://github.com/yzyolala/CS546-Food-Survivor-Project
+# Github Link
+![[](https://github.com/yzyolala/CS546-Food-Survivor-Project/blob/main/README.md)](https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png)
