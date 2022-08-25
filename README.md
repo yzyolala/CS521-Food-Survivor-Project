@@ -41,7 +41,6 @@ The introduction of this restaurant
 What the other users have got from this restaurant. (Because this is a mysterious box)
 The star of this restaurant based on the users’ comment
 The price of this restaurant food box
-The LGBTQ tag to show if this restaurant is a LGBTQ support restaurant.
 PS: This is a mysterious and random provided food website. So, the users cannot submit any comment about the foods’ pictures. Our target is reduce food waste, but not choose what you like in specific. They can only rate stars.
 
 4. User Profile page
