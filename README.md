@@ -48,6 +48,13 @@ PS: This is a mysterious and random provided food website. So, the users cannot 
 a. Displays username, profile pictures 
 b. Displays the restaurant this user has rated and saved. 
 
+# Instructions
+1. Download the zip from the below link
+2. Open **terminal** (on Mac) or **Commend Shell** (Windows) and run `cd <Code Folder Path>`
+3. Then run `npm install` to install the required dependencies
+4. Then run `npm run seed` to seed the database
+5. Later run `npm start` to run the code on localhost
+6. Finally open browser and visit `http://localhost:3000`
 
 # Github Link
 [Github Link here](https://github.com/yzyolala/CS546-Food-Survivor-Project)
