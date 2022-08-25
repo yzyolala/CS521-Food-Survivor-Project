@@ -50,4 +50,4 @@ b. Displays the restaurant this user has rated and saved.
 
 
 # Github Link
-![[](https://github.com/yzyolala/CS546-Food-Survivor-Project/blob/main/README.md)](https://logos-world.net/wp-content/uploads/2020/11/GitHub-Emblem.png)
+[Github Link here](https://github.com/yzyolala/CS546-Food-Survivor-Project)
