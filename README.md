@@ -5,7 +5,7 @@ Final Project Proposal
 |--|--|
 |Zhenying Yu| 20009719 |
 |Haitian Jiang| 20016465
-|Siqing Fan | 10479201
+|Siqiang Fan | 10479201
 
 ## Name of the project
 **Food Survivor**
