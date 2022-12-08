@@ -1,12 +1,11 @@
-# CS546-Food-Survivor-Project
-Final Project Proposal for **Group 4**
+# CS521-Food-Survivor-Project
+Final Project Proposal
 
 | Group Members |CWID  |
 |--|--|
-|Chaitanya Pawar| 20008880
-|Deke He | 10477400
-| Barun Roy | 10469915
-| Zhenying Yu| 20009719 |
+|Zhenying Yu| 20009719 |
+|Haitian Jiang| 20016465
+|Siqing Fan | 10479201
 
 ## Name of the project
 **Food Survivor**
